@@ -6,8 +6,14 @@
 (function () {
   const P = window.MarQPattern;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const fine = window.matchMedia("(pointer: fine)").matches;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+  // Subscribers re-run after a language switch (kinetic type, recompose, etc.)
+  const langSubscribers = [];
+  const onLangChange = (fn) => { langSubscribers.push(fn); };
+  const runLangHooks = (lang) => { langSubscribers.forEach((fn) => { try { fn(lang); } catch (e) {} }); };
 
   // tweakable state
   const state = {
@@ -20,6 +26,28 @@
   function setSVG(el, svg) { if (el) el.innerHTML = svg; }
 
   function fr(base) { return Math.min(0.95, base * state.density); }
+
+  // Flip ONE tile in a freshly-rendered mosaic to gold — the rare "gold mark"
+  // brand beat. Deterministic by seed, so it's stable and present even when motion is off.
+  function goldFlip(host, seed) {
+    if (!host) return;
+    const svg = host.querySelector("svg");
+    if (!svg) return;
+    const groups = svg.querySelectorAll(":scope > g");
+    if (!groups.length) return;
+    const idx = Math.floor(P.rngFrom((seed | 0) * 7 + 3)() * groups.length);
+    groups[idx].querySelectorAll("circle, path, rect").forEach((s) => s.setAttribute("fill", P.COLORS.gold700));
+  }
+
+  // Reusable builders so hover/scroll can re-render a single element.
+  function buildSvcThumb(el, seed) {
+    setSVG(el, P.mosaic(7, 3, { seed, mode: "vivid", fillRatio: fr(0.8), bgChance: 0.85, sheenCount: 0, glyphs: true, gap: 0 }));
+    goldFlip(el, seed);
+  }
+  function buildCaseArt(el, seed, big) {
+    setSVG(el, P.mosaic(big ? 6 : 4, big ? 4 : 3, { seed, mode: "vivid", fillRatio: fr(0.82), bgChance: 0.9, sheenCount: 1, glyphs: true, gap: 0 }));
+    goldFlip(el, seed);
+  }
 
   function fillPatterns() {
     if (!P) return;
@@ -53,18 +81,13 @@
     setSVG($("#footerEdge"), P.strip(24, { seed: 30, mode: "vivid", fillRatio: 0.95 }));
     setSVG($("#mobileMenuPattern"), P.scatter(6, 5, { seed: 12, mode: "vivid", fillRatio: fr(0.5) }));
 
-    // service card thumbs
-    $$(".svc-card__thumb").forEach((el) => {
-      const seed = +el.dataset.seed || 7;
-      setSVG(el, P.mosaic(7, 3, { seed, mode: "vivid", fillRatio: fr(0.8), bgChance: 0.85, sheenCount: 0, glyphs: true, gap: 0 }));
-    });
+    // service card thumbs (one gold tile baked in)
+    $$(".svc-card__thumb").forEach((el) => { buildSvcThumb(el, +el.dataset.seed || 7); });
 
-    // case study placeholders
+    // case study placeholders (one gold tile baked in)
     $$(".case").forEach((el) => {
-      const seed = +el.dataset.seed || 7;
-      const big = el.classList.contains("case--lg");
       const art = $(".case__art", el);
-      setSVG(art, P.mosaic(big ? 6 : 4, big ? 4 : 3, { seed, mode: "vivid", fillRatio: fr(0.82), bgChance: 0.9, sheenCount: 1, glyphs: true, gap: 0 }));
+      buildCaseArt(art, +el.dataset.seed || 7, el.classList.contains("case--lg"));
     });
 
     // QR (placeholder)
@@ -308,6 +331,7 @@
     html.dir = isAr ? "rtl" : "ltr";
     $$(".lang-toggle__opt").forEach((o) => o.classList.toggle("is-on", o.dataset.lang === lang));
     localStorage.setItem("marq-lang", lang);
+    runLangHooks(lang);
   }
   function initLang() {
     const btn = $("#langToggle");
@@ -376,6 +400,103 @@
     refill: fillPatterns,
   };
 
+  /* ---------------- Scroll progress ---------------- */
+  function initScrollProgress() {
+    const bar = $(".scroll-progress span");
+    if (!bar || reduceMotion) return;
+    let raf = null;
+    const update = () => {
+      raf = null;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+      bar.style.transform = "scaleX(" + p.toFixed(4) + ")";
+    };
+    window.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+    window.addEventListener("resize", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+    update();
+  }
+
+  /* ---------------- Pattern recompose (the brand signature) ---------------- */
+  function initPatternRecompose() {
+    // Re-fill patterns after a language switch so a mid-hover recompose never strands.
+    onLangChange(() => fillPatterns());
+    if (reduceMotion) return; // static gold-flip state is baked in fillPatterns
+
+    // Service cards: thumb reassembles on hover, restores on leave.
+    $$(".svc-card").forEach((card) => {
+      const thumb = $(".svc-card__thumb", card);
+      if (!thumb) return;
+      const base = +thumb.dataset.seed || 7;
+      card.addEventListener("pointerenter", () => buildSvcThumb(thumb, base + 7));
+      card.addEventListener("pointerleave", () => buildSvcThumb(thumb, base));
+    });
+
+    // Work cases: art recomposes on hover.
+    $$(".case").forEach((c) => {
+      const art = $(".case__art", c);
+      if (!art) return;
+      const base = +c.dataset.seed || 7;
+      const big = c.classList.contains("case--lg");
+      c.addEventListener("pointerenter", () => buildCaseArt(art, base + 9, big));
+      c.addEventListener("pointerleave", () => buildCaseArt(art, base, big));
+    });
+
+    // Divider strips: a single recompose when they scroll into view.
+    const strips = [
+      { el: $("#whyStripTop"), cols: 18, seed: 9, mode: "soft" },
+      { el: $("#footerEdge"), cols: 24, seed: 30, mode: "vivid" },
+    ].filter((s) => s.el);
+    if (strips.length && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const s = strips.find((x) => x.el === e.target);
+          if (s) setSVG(s.el, P.strip(s.cols, { seed: s.seed + 5, mode: s.mode, fillRatio: s.mode === "soft" ? 0.9 : 0.95 }));
+          io.unobserve(e.target);
+        });
+      }, { threshold: 0.6 });
+      strips.forEach((s) => io.observe(s.el));
+    }
+  }
+
+  /* ---------------- Magnetic CTAs ---------------- */
+  function initMagnetic() {
+    if (!fine || reduceMotion) return;
+    const STRENGTH = 0.28;
+    $$(".btn--gold").forEach((btn) => {
+      let raf = null, tx = 0, ty = 0;
+      const apply = () => { raf = null; btn.style.transform = "translate(" + tx.toFixed(1) + "px," + ty.toFixed(1) + "px)"; };
+      btn.addEventListener("pointermove", (e) => {
+        const r = btn.getBoundingClientRect();
+        tx = (e.clientX - (r.left + r.width / 2)) * STRENGTH;
+        ty = (e.clientY - (r.top + r.height / 2)) * STRENGTH;
+        if (!raf) raf = requestAnimationFrame(apply);
+      });
+      btn.addEventListener("pointerleave", () => { tx = ty = 0; btn.style.transform = ""; });
+    });
+  }
+
+  /* ---------------- Custom geometric cursor ---------------- */
+  function initCursor() {
+    if (!fine || reduceMotion) return;
+    const cur = $(".cursor");
+    if (!cur) return;
+    const HOT = "a, button, .btn, .case, .svc-card, .lang-toggle, [href]";
+    let x = window.innerWidth / 2, y = window.innerHeight / 2, raf = null, started = false;
+    const render = () => { raf = null; cur.style.transform = "translate(" + x + "px," + y + "px) translate(-50%,-50%)"; };
+    window.addEventListener("pointermove", (e) => {
+      if (e.pointerType && e.pointerType !== "mouse") return; // ignore touch/pen
+      x = e.clientX; y = e.clientY;
+      if (!started) { started = true; document.body.classList.add("has-cursor"); }
+      if (!raf) raf = requestAnimationFrame(render);
+      cur.classList.toggle("is-hot", !!(e.target.closest && e.target.closest(HOT)));
+    }, { passive: true });
+    window.addEventListener("pointerdown", () => cur.classList.add("is-down"));
+    window.addEventListener("pointerup", () => cur.classList.remove("is-down"));
+    document.addEventListener("mouseleave", () => { cur.style.opacity = "0"; });
+    document.addEventListener("mouseenter", () => { cur.style.opacity = ""; });
+  }
+
   /* ---------------- Boot ---------------- */
   function boot() {
     fillPatterns();
@@ -387,6 +508,10 @@
     initMarquee();
     initParallax();
     initMosaicDrift();
+    initScrollProgress();
+    initPatternRecompose();
+    initMagnetic();
+    initCursor();
     initLang();
     runPreloader();
   }

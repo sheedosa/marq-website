@@ -18,6 +18,12 @@
 </head>
 <body data-hero="a">
 
+<!-- Scroll progress + film grain (atmosphere) -->
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+<div class="grain" aria-hidden="true"></div>
+<!-- Custom geometric cursor (desktop, non-reduced-motion only — added by JS) -->
+<div class="cursor" aria-hidden="true"></div>
+
 <!-- ============ PRE-LOADER ============ -->
 <div class="preloader" id="preloader" aria-hidden="true">
   <div class="preloader__stage" id="preloaderStage"></div>
@@ -73,12 +79,16 @@
 <!-- ============ HERO ============ -->
 <header class="hero" id="hero">
   <div class="hero__media" aria-hidden="true">
-    <video id="heroVideo" src="assets/hero.mp4" autoplay muted loop playsinline preload="auto"></video>
+    <video id="heroVideo" autoplay muted loop playsinline preload="metadata">
+      <source src="assets/hero.mp4" type="video/mp4" />
+      <!-- Perf: add a compressed WebM source + poster after re-encoding (see README).
+           <source src="assets/hero.webm" type="video/webm" />  and  poster="assets/hero-poster.jpg" on <video> -->
+    </video>
   </div>
   <div class="hero__scrim" aria-hidden="true"></div>
   <div class="container hero__inner">
-    <p class="eyebrow hero__eyebrow reveal" data-ar="حلول العلامات التجارية · الدوحة"><span class="eyebrow-tri" aria-hidden="true"></span>Branding Solutions · Doha</p>
-    <h1 class="hero__head reveal" data-delay="1" data-ar="علامات تُبنى لتبقى في ">Brands built to be <em class="hero__accent" data-ar="الذاكرة">remembered</em>.</h1>
+    <p class="eyebrow hero__eyebrow reveal" data-ar="حلول العلامات التجارية · ليبيا"><span class="eyebrow-tri" aria-hidden="true"></span>Branding Solutions · Libya</p>
+    <h1 class="hero__head reveal kin" data-delay="1" data-ar="علامات تُبنى لتبقى في ">Brands built to be <em class="hero__accent" data-ar="الذاكرة">remembered</em>.</h1>
     <p class="hero__sub reveal" data-delay="2" data-ar="مارك استوديو للعلامات التجارية يحوّل الأفكار الطموحة إلى هويات يتعرّف عليها الناس، ويثقون بها، ويتذكّرونها.">MarQ is a branding studio that turns ambitious ideas into identities people recognise, trust, and remember.</p>
     <div class="hero__ctas reveal" data-delay="3">
       <a href="#work" class="btn btn--gold" data-ar="شاهد أعمالنا">See our work <span class="arrow">→</span></a>
@@ -102,7 +112,7 @@
   <div class="why__strip" id="whyStripTop" aria-hidden="true"></div>
   <div class="container">
     <p class="eyebrow why__eyebrow reveal" data-ar="لماذا نحن موجودون">Why we exist</p>
-    <p class="why__statement reveal" data-delay="1">
+    <p class="why__statement reveal kin" data-delay="1">
       Most companies chase attention. We build <em data-ar="التميّز">recognition</em>. A brand isn’t a logo or a palette — it’s the <em data-ar="الأثر">mark</em> you leave in someone’s memory. That’s the only thing worth designing for.
     </p>
   </div>
@@ -314,7 +324,7 @@
   <div class="cta__pattern" id="ctaPattern" aria-hidden="true"></div>
   <div class="container cta__inner">
     <p class="eyebrow cta__eyebrow reveal" data-ar="هل أنت مستعد لترك أثر؟">Ready to leave a mark?</p>
-    <h2 class="cta__head reveal" data-delay="1">
+    <h2 class="cta__head reveal kin" data-delay="1">
       <span data-ar="لنبنِ علامة تستحق">Let’s build a brand worth</span>
       <span class="cta__keyword" data-ar="أن تُذكر.">remembering.</span>
     </h2>
@@ -322,7 +332,7 @@
       <a href="mailto:hello@marq.studio" class="btn btn--gold" data-ar="ابدأ مشروعك">Start a project <span class="arrow">→</span></a>
       <div class="cta__contact">
         <a href="mailto:hello@marq.studio" class="link-draw" dir="ltr">hello@marq.studio</a>
-        <a href="tel:+97444000000" class="link-draw" dir="ltr">+974 4400 0000</a>
+        <a href="tel:+218210000000" class="link-draw" dir="ltr">+218 21 000 0000</a>
       </div>
     </div>
   </div>
@@ -338,7 +348,7 @@
         <span class="logo__word"><span class="logo__m">M</span>ar<span class="logo__q">Q</span></span>
         <span class="logo__tag">Branding Solutions</span>
       </span>
-      <p class="footer__line" data-ar="نبني علامات تستحق أن تُذكر — من الدوحة إلى العالم.">A mark worth remembering — from Doha to the world.</p>
+      <p class="footer__line" data-ar="نبني علامات تستحق أن تُذكر — من ليبيا إلى العالم.">A mark worth remembering — from Libya to the world.</p>
     </div>
 
     <nav class="footer__cols" aria-label="Footer">

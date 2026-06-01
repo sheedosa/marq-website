@@ -71,6 +71,14 @@
   --font-body: "Montserrat", system-ui, -apple-system, sans-serif;
   --font-fat: "Archivo Black", "Montserrat", sans-serif;
 
+  /* Accessible variants for small text on LIGHT backgrounds (WCAG AA).
+     Brand teal #00ABBD = 2.78:1 and gold #C39909 = 2.66:1 fail for eyebrow/index text. */
+  --teal-ink: #0A6B76;   /* deepened teal, >=4.5:1 on off-white */
+  --gold-ink: #8A6A06;   /* deepened gold, >=4.5:1 on off-white */
+
+  /* Atmosphere */
+  --grain-opacity: 0.06;
+
   /* Tweakable */
   --motion-scale: 1;
   --pattern-density: 1;

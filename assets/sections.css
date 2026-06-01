@@ -112,10 +112,10 @@ body.menu-open { overflow: hidden; }
 .section-head__lead { display: flex; gap: clamp(16px, 2vw, 30px); align-items: flex-start; }
 .section-index {
   font-family: var(--font-fat); font-size: clamp(1rem, 1.3vw, 1.35rem);
-  color: var(--gold-700); line-height: 1; letter-spacing: .02em; flex: none;
+  color: var(--gold-ink); line-height: 1; letter-spacing: .02em; flex: none;
   padding-top: .5em; position: relative;
 }
-.section-index::after { content: ""; display: block; width: 26px; height: 2px; background: var(--gold-700); margin-top: 12px; opacity: .55; }
+.section-index::after { content: ""; display: block; width: 26px; height: 2px; background: var(--gold-ink); margin-top: 12px; opacity: .7; }
 .section-title { font-size: var(--fs-h2); color: var(--plum-900); margin-top: 12px; text-wrap: balance; max-width: 18ch; }
 .section-head__intro { color: var(--muted); font-size: clamp(1rem, 1.1vw, 1.12rem); max-width: 40ch; line-height: 1.6; }
 .section-head--split { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(24px, 4vw, 72px); align-items: end; }
@@ -126,7 +126,7 @@ body.menu-open { overflow: hidden; }
   .section-head--split { grid-template-columns: 1fr; align-items: start; gap: 18px; }
   .section-head__action { text-align: start; }
 }
-.eyebrow { color: var(--teal-700); }
+.eyebrow { color: var(--teal-ink); }
 
 /* ============ HERO ============ */
 .hero {
@@ -252,7 +252,7 @@ html[lang="ar"] .hero__caps li { letter-spacing: 0; }
   transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out), border-color .4s;
   will-change: transform;
 }
-.svc-card:hover { transform: translateY(-6px); box-shadow: 0 26px 50px -28px rgba(61,19,64,.45); border-color: transparent; }
+.svc-card:hover { transform: translateY(-8px); box-shadow: 0 30px 58px -28px rgba(61,19,64,.5); border-color: color-mix(in srgb, var(--gold-ink) 55%, transparent); }
 .svc-card__thumb {
   width: 100%; aspect-ratio: 16 / 7; border-radius: 12px; overflow: hidden;
   margin-bottom: 22px; background: var(--plum-100);
@@ -306,7 +306,9 @@ html[lang="ar"] .hero__caps li { letter-spacing: 0; }
   position: relative; border-radius: var(--radius-md); overflow: hidden;
   aspect-ratio: 4 / 3; display: block;
   background: var(--plum-900);
+  transition: box-shadow .45s var(--ease-out), transform .45s var(--ease-out);
 }
+.case:hover { box-shadow: 0 34px 66px -32px rgba(61,19,64,.62); }
 .case--lg { grid-column: span 3; aspect-ratio: 16 / 10; }
 .case__art { position: absolute; inset: 0; }
 .case__art svg { width: 100%; height: 100%; transition: transform .8s var(--ease-out); }
@@ -452,3 +454,67 @@ body.preloading { overflow: hidden; }
 html[dir="rtl"] .hero__scroll-line::after { animation-name: scrollLineRtl; }
 @keyframes scrollLineRtl { 0%{transform:translateX(100%)} 50%{transform:translateX(0)} 100%{transform:translateX(-100%)} }
 html[dir="rtl"] .link-draw::after { transform-origin: right; }
+
+/* ============ ATMOSPHERE: scroll progress + film grain ============ */
+.scroll-progress {
+  position: fixed; inset-block-start: 0; inset-inline: 0; height: 3px;
+  z-index: 100; pointer-events: none; background: color-mix(in srgb, var(--plum-900) 14%, transparent);
+}
+.scroll-progress span {
+  display: block; height: 100%; width: 100%;
+  background: linear-gradient(90deg, var(--gold-700), var(--gold-500));
+  transform: scaleX(0); transform-origin: left center; will-change: transform;
+}
+html[dir="rtl"] .scroll-progress span { transform-origin: right center; }
+
+/* Single fixed grain overlay — subtle filmic texture across the page.
+   mix-blend overlay at low opacity reads as depth on the dark bands and as
+   paper texture on the light ones; pointer-events:none so it never blocks. */
+.grain {
+  position: fixed; inset: 0; z-index: 96; pointer-events: none;
+  opacity: var(--grain-opacity); mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+/* Kinetic heading reveal — clip-path wipe + slight rise.
+   Applied to the heading element itself (no DOM wrapper) so text nodes stay
+   intact and the EN/ع language toggle is unaffected. */
+.reveal.kin {
+  clip-path: inset(-4% -4% 114% -4%);
+  transform: translateY(0.32em);
+  transition: clip-path 1s var(--ease-out), transform 1s var(--ease-out), opacity .8s var(--ease-out);
+}
+.reveal.kin.in { clip-path: inset(-4% -4% -4% -4%); transform: none; }
+
+/* Custom geometric cursor — a small plum dot that becomes a gold ring over
+   interactive elements. Only activated by JS on fine pointers + non-reduced-motion. */
+.cursor {
+  position: fixed; top: 0; left: 0; width: 12px; height: 12px;
+  z-index: 300; pointer-events: none; opacity: 0;
+  border-radius: 3px; background: var(--plum-700);
+  box-shadow: 0 0 0 1px rgba(250,247,250,.35);
+  transition: width .25s var(--ease-out), height .25s var(--ease-out),
+              background-color .25s, border-radius .25s, opacity .3s, box-shadow .25s;
+  will-change: transform;
+}
+body.has-cursor .cursor { opacity: 1; }
+body.has-cursor { cursor: none; }
+body.has-cursor a, body.has-cursor button, body.has-cursor .btn,
+body.has-cursor .case, body.has-cursor .svc-card, body.has-cursor .lang-toggle { cursor: none; }
+.cursor.is-hot {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: transparent; box-shadow: inset 0 0 0 1.5px var(--gold-700);
+}
+.cursor.is-down { width: 9px; height: 9px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress { display: none; }
+  .reveal.kin { clip-path: none !important; transform: none !important; }
+  .cursor { display: none; }
+  /* fully-designed static states (no hover-driven motion) */
+  .svc-card:hover { transform: none; }
+  .svc-card:hover .svc-card__thumb svg { transform: none; }
+  .case:hover { transform: none; }
+  .case:hover .case__art svg { transform: none; }
+  .case__cta { transform: none; opacity: 1; }
+}

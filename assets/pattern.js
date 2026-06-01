@@ -14,8 +14,10 @@
     plum100: "#E7DEE8",
     teal700: "#00ABBD",
     teal500: "#4FC5D2",
+    teal300: "#8FDAE2",
     gold700: "#C39909",
     gold500: "#D4B23E",
+    gold300: "#E0C76E",
     white:   "#FFFFFF",
     offwhite:"#FAF7FA",
     ink:     "#211B22",
@@ -64,29 +66,33 @@
   // weighted color pick honoring 7:2:1 (plum:teal:gold)
   function pickColor(rng, mode = "vivid") {
     const r = rng();
+    // 7:2:1 — gold is a RARE spark (~5%), not a default fill.
     if (mode === "vivid") {
       if (r < 0.70) return rng() < 0.5 ? C.plum700 : (rng() < 0.5 ? C.plum900 : C.plum500);
       if (r < 0.90) return C.teal700;
+      if (r < 0.95) return C.plum500;
       return C.gold700;
     }
     if (mode === "soft") {
       if (r < 0.70) return rng() < 0.5 ? C.plum300 : C.plum100;
-      if (r < 0.90) return C.teal300 || C.teal500;
-      return C.gold300 || C.gold500;
+      if (r < 0.90) return C.teal300;
+      if (r < 0.95) return C.plum300;
+      return C.gold300;
     }
     // mono (single-tone, for scatter texture)
     return mode;
   }
 
   function contrastFor(bg) {
-    // choose a foreground that reads against bg
+    // choose a foreground that reads against bg.
+    // Gold is intentionally NOT a default foreground — it's reserved as the rare
+    // accent (set via pickColor ~5%, or the deliberate "gold flip" highlight tile).
     if (bg === C.plum700 || bg === C.plum900 || bg === C.plum500) {
-      const opts = [C.teal700, C.gold700, C.offwhite, C.plum100];
-      return opts;
+      return [C.teal700, C.offwhite, C.plum100, C.teal500];
     }
-    if (bg === C.teal700) return [C.plum900, C.gold700, C.white];
+    if (bg === C.teal700) return [C.plum900, C.white, C.plum500];
     if (bg === C.gold700) return [C.plum900, C.white, C.teal700];
-    return [C.plum700, C.teal700, C.gold700];
+    return [C.plum700, C.teal700, C.plum900];
   }
 
   // seeded RNG (mulberry32)
