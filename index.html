@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MarQ — Branding Solutions</title>
+<meta name="description" content="MarQ is a branding studio that turns ambitious ideas into identities people recognise, trust, and remember." />
+
+<!-- Fonts — per the MarQ brand book: Montserrat (letters) + Braggadocio (numerals).
+     Braggadocio is a licensed Microsoft font; Archivo Black stands in for web numerals.
+     Arabic letters → Cairo / Tajawal (geometric, pairs with Montserrat). -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&family=Archivo+Black&family=Cairo:wght@500;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="assets/marq.css" />
+<link rel="stylesheet" href="assets/sections.css" />
+</head>
+<body data-hero="a">
+
+<!-- ============ PRE-LOADER ============ -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader__stage" id="preloaderStage"></div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a class="nav__logo" href="#top" aria-label="MarQ — Branding Solutions home">
+      <span class="logo" dir="ltr">
+        <span class="logo__word"><span class="logo__m">M</span>ar<span class="logo__q">Q</span></span>
+        <span class="logo__tag">Branding Solutions</span>
+      </span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#work" class="link-draw" data-ar="أعمالنا">Work</a>
+      <a href="#services" class="link-draw" data-ar="خدماتنا">Services</a>
+      <a href="#process" class="link-draw" data-ar="منهجنا">Process</a>
+      <a href="#about" class="link-draw" data-ar="من نحن">About</a>
+      <a href="#contact" class="link-draw" data-ar="تواصل">Contact</a>
+    </nav>
+
+    <div class="nav__actions">
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+        <span class="lang-toggle__opt is-on" data-lang="en">EN</span>
+        <span class="lang-toggle__sep">/</span>
+        <span class="lang-toggle__opt" data-lang="ar">ع</span>
+      </button>
+      <a href="#contact" class="btn btn--gold nav__cta" data-ar="ابدأ مشروعك">Start a project</a>
+      <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile overlay menu -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu__pattern" id="mobileMenuPattern"></div>
+  <nav class="mobile-menu__links">
+    <a href="#work" data-ar="أعمالنا">Work</a>
+    <a href="#services" data-ar="خدماتنا">Services</a>
+    <a href="#process" data-ar="منهجنا">Process</a>
+    <a href="#about" data-ar="من نحن">About</a>
+    <a href="#contact" data-ar="تواصل">Contact</a>
+  </nav>
+  <a href="#contact" class="btn btn--gold mobile-menu__cta" data-ar="ابدأ مشروعك">Start a project</a>
+</div>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="hero">
+  <div class="hero__media" aria-hidden="true">
+    <video id="heroVideo" src="assets/hero.mp4" autoplay muted loop playsinline preload="auto"></video>
+  </div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <div class="container hero__inner">
+    <p class="eyebrow hero__eyebrow reveal" data-ar="حلول العلامات التجارية · الدوحة"><span class="eyebrow-tri" aria-hidden="true"></span>Branding Solutions · Doha</p>
+    <h1 class="hero__head reveal" data-delay="1" data-ar="علامات تُبنى لتبقى في ">Brands built to be <em class="hero__accent" data-ar="الذاكرة">remembered</em>.</h1>
+    <p class="hero__sub reveal" data-delay="2" data-ar="مارك استوديو للعلامات التجارية يحوّل الأفكار الطموحة إلى هويات يتعرّف عليها الناس، ويثقون بها، ويتذكّرونها.">MarQ is a branding studio that turns ambitious ideas into identities people recognise, trust, and remember.</p>
+    <div class="hero__ctas reveal" data-delay="3">
+      <a href="#work" class="btn btn--gold" data-ar="شاهد أعمالنا">See our work <span class="arrow">→</span></a>
+      <a href="#contact" class="btn btn--ghost-light" data-ar="ابدأ مشروعك">Start a project</a>
+    </div>
+  </div>
+  <span class="hero__ratio" title="Plum : Teal : Gold = 7 : 2 : 1"><span class="hero__ratio-glyph num">7:2:1</span></span>
+  <div class="container hero__meta reveal" data-delay="4">
+    <a href="#why" class="hero__scroll" aria-label="Scroll to content"><span class="hero__scroll-line"></span><span data-ar="مرّر للأسفل">Scroll</span></a>
+    <ul class="hero__caps" aria-label="Capabilities">
+      <li data-ar="استراتيجية">Strategy</li>
+      <li data-ar="هوية">Identity</li>
+      <li data-ar="رقمي">Digital</li>
+      <li data-ar="إنتاج">Production</li>
+    </ul>
+  </div>
+</header>
+
+<!-- ============ POSITIONING / WHY ============ -->
+<section class="why section" id="why">
+  <div class="why__strip" id="whyStripTop" aria-hidden="true"></div>
+  <div class="container">
+    <p class="eyebrow why__eyebrow reveal" data-ar="لماذا نحن موجودون">Why we exist</p>
+    <p class="why__statement reveal" data-delay="1">
+      Most companies chase attention. We build <em data-ar="التميّز">recognition</em>. A brand isn’t a logo or a palette — it’s the <em data-ar="الأثر">mark</em> you leave in someone’s memory. That’s the only thing worth designing for.
+    </p>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="services section" id="services">
+  <div class="container">
+    <div class="section-head section-head--split reveal">
+      <div class="section-head__lead">
+        <span class="section-index num">01</span>
+        <div>
+          <p class="eyebrow" data-ar="ما نقدّمه">What we do</p>
+          <h2 class="section-title" data-ar="قدرات مبنية على نظام واحد متماسك.">Capabilities built on one coherent system.</h2>
+        </div>
+      </div>
+      <p class="section-head__intro" data-ar="من الاستراتيجية إلى الإنتاج — نُسلّم العمل كنظام واحد مترابط، لا كمشاريع منفصلة.">From strategy to production, we deliver one connected system — not a stack of unrelated projects.</p>
+    </div>
+    <div class="services__grid" id="servicesGrid">
+      <article class="svc-card reveal">
+        <div class="svc-card__thumb" data-seed="11"></div>
+        <h3 class="svc-card__title" data-ar="استراتيجية العلامة">Brand Strategy</h3>
+        <ul class="svc-card__list">
+          <li data-ar="التموضع">Positioning</li><li data-ar="هيكلة العلامة">Brand architecture</li><li data-ar="التسمية">Naming</li><li data-ar="الجمهور والرؤى">Audience &amp; insight</li><li data-ar="صوت العلامة">Brand voice</li>
+        </ul>
+      </article>
+      <article class="svc-card reveal" data-delay="1">
+        <div class="svc-card__thumb" data-seed="22"></div>
+        <h3 class="svc-card__title" data-ar="الهوية والتصميم">Identity &amp; Design</h3>
+        <ul class="svc-card__list">
+          <li data-ar="الشعارات والعلامات">Logo &amp; marks</li><li data-ar="الأنظمة البصرية">Visual systems</li><li data-ar="الخطوط">Typography</li><li data-ar="الإرشادات">Guidelines</li><li data-ar="الإدارة الفنية">Art direction</li>
+        </ul>
+      </article>
+      <article class="svc-card reveal" data-delay="2">
+        <div class="svc-card__thumb" data-seed="33"></div>
+        <h3 class="svc-card__title" data-ar="الرقمي">Digital</h3>
+        <ul class="svc-card__list">
+          <li data-ar="المواقع">Websites</li><li data-ar="تجربة وواجهة المستخدم">UI/UX</li><li data-ar="أنظمة التواصل الاجتماعي">Social systems</li><li data-ar="الموشن">Motion</li><li data-ar="تجارب QR والروابط">QR &amp; link experiences</li>
+        </ul>
+      </article>
+      <article class="svc-card reveal" data-delay="3">
+        <div class="svc-card__thumb" data-seed="44"></div>
+        <h3 class="svc-card__title" data-ar="التواصل">Communication</h3>
+        <ul class="svc-card__list">
+          <li data-ar="الحملات">Campaigns</li><li data-ar="المحتوى">Content</li><li data-ar="إدارة التواصل الاجتماعي">Social management</li><li data-ar="التواصل الداخلي">Internal comms</li>
+        </ul>
+      </article>
+      <article class="svc-card reveal" data-delay="4">
+        <div class="svc-card__thumb" data-seed="55"></div>
+        <h3 class="svc-card__title" data-ar="الإنتاج">Production</h3>
+        <ul class="svc-card__list">
+          <li data-ar="الطباعة">Print</li><li data-ar="التغليف">Packaging</li><li data-ar="التصوير">Photography</li><li data-ar="الفيديو">Video</li><li data-ar="الأجنحة والفعاليات">Booths &amp; events</li>
+        </ul>
+      </article>
+      <article class="svc-card svc-card--feature reveal" data-delay="5">
+        <div class="svc-card__thumb" data-seed="66"></div>
+        <h3 class="svc-card__title" data-ar="رعاية العلامة (اشتراك)">Brand Care <span class="svc-card__tag" data-ar="اشتراك">retainer</span></h3>
+        <ul class="svc-card__list">
+          <li data-ar="شريك تصميم مستمر">Ongoing design partner</li><li data-ar="القوالب">Templates</li><li data-ar="أنظمة الأصول">Asset systems</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="process section" id="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-head__lead">
+        <span class="section-index num">02</span>
+        <div>
+          <p class="eyebrow" data-ar="كيف نعمل">How we work</p>
+          <h2 class="section-title" data-ar="أربع خطوات. شراكة واحدة.">Four steps. One partnership.</h2>
+        </div>
+      </div>
+    </div>
+    <div class="process__track" id="processTrack">
+      <div class="process__line" aria-hidden="true"><span class="process__line-fill" id="processLineFill"></span></div>
+      <ol class="process__steps">
+        <li class="process__step reveal">
+          <span class="process__num num">01</span>
+          <h3 class="process__name" data-ar="نكتشف">Discover</h3>
+          <p class="process__desc" data-ar="نتعرّف على عالمك وجمهورك وطموحك.">We learn your world, audience, and ambition.</p>
+        </li>
+        <li class="process__step reveal" data-delay="1">
+          <span class="process__num num">02</span>
+          <h3 class="process__name" data-ar="نحدّد">Define</h3>
+          <p class="process__desc" data-ar="الاستراتيجية والتموضع والفكرة الجوهرية.">Strategy, positioning, and the core idea.</p>
+        </li>
+        <li class="process__step reveal" data-delay="2">
+          <span class="process__num num">03</span>
+          <h3 class="process__name" data-ar="نصمّم">Design</h3>
+          <p class="process__desc" data-ar="الهوية والنظام وكل نقطة تواصل.">Identity, system, and every touchpoint.</p>
+        </li>
+        <li class="process__step reveal" data-delay="3">
+          <span class="process__num num">04</span>
+          <h3 class="process__name" data-ar="نُطلق">Deliver</h3>
+          <p class="process__desc" data-ar="إطلاق عبر الرقمي والطباعة والمكان — ونبقى شريك علامتك.">Rollout across digital, print, and space — and we stay on as your brand partner.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SELECTED WORK ============ -->
+<section class="work section" id="work">
+  <div class="container">
+    <div class="section-head section-head--split reveal">
+      <div class="section-head__lead">
+        <span class="section-index num">03</span>
+        <div>
+          <p class="eyebrow" data-ar="أعمال مختارة">Selected work</p>
+          <h2 class="section-title" data-ar="علامات صمّمناها لتبقى في الذاكرة.">Brands we designed to be remembered.</h2>
+        </div>
+      </div>
+      <p class="section-head__intro section-head__action"><a href="#contact" class="link-draw" data-ar="عرض كل الأعمال ←">View all work →</a></p>
+    </div>
+    <div class="work__grid" id="workGrid">
+      <a class="case reveal case--lg" data-seed="101" data-cat="Branding &amp; Identity" data-cat-ar="علامة وهوية" href="#contact">
+        <div class="case__art"></div>
+        <div class="case__meta"><span class="case__cat" data-ar="علامة وهوية">Branding &amp; Identity</span><span class="case__name" data-ar="تِكان للأطعمة والمشروبات">Tikkan F&amp;B</span></div>
+        <span class="case__cta" data-ar="استكشف">Explore →</span>
+      </a>
+      <a class="case reveal" data-delay="1" data-seed="102" href="#contact">
+        <div class="case__art"></div>
+        <div class="case__meta"><span class="case__cat" data-ar="استراتيجية ورقمي">Strategy &amp; Digital</span><span class="case__name" data-ar="يلا لوجستيك">Yalla Logistics</span></div>
+        <span class="case__cta" data-ar="استكشف">Explore →</span>
+      </a>
+      <a class="case reveal" data-delay="2" data-seed="103" href="#contact">
+        <div class="case__art"></div>
+        <div class="case__meta"><span class="case__cat" data-ar="هوية ومكان">Identity &amp; Space</span><span class="case__name" data-ar="عيادة نور">Noor Clinic</span></div>
+        <span class="case__cta" data-ar="استكشف">Explore →</span>
+      </a>
+      <a class="case reveal" data-seed="104" href="#contact">
+        <div class="case__art"></div>
+        <div class="case__meta"><span class="case__cat" data-ar="تجزئة وتغليف">Retail &amp; Packaging</span><span class="case__name" data-ar="ليلى ريتيل">Layla Retail</span></div>
+        <span class="case__cta" data-ar="استكشف">Explore →</span>
+      </a>
+      <a class="case reveal case--lg" data-delay="1" data-seed="105" data-cat="Brand &amp; Product" href="#contact">
+        <div class="case__art"></div>
+        <div class="case__meta"><span class="case__cat" data-ar="علامة ومنتج">Brand &amp; Product</span><span class="case__name" data-ar="فالكون فينتك">Falcon Fintech</span></div>
+        <span class="case__cta" data-ar="استكشف">Explore →</span>
+      </a>
+      <a class="case reveal" data-delay="2" data-seed="106" href="#contact">
+        <div class="case__art"></div>
+        <div class="case__meta"><span class="case__cat" data-ar="ضيافة">Hospitality</span><span class="case__name" data-ar="سيدار للضيافة">Cedar Hospitality</span></div>
+        <span class="case__cta" data-ar="استكشف">Explore →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS BAND ============ -->
+<section class="stats section" id="stats">
+  <div class="stats__pattern" id="statsPattern" aria-hidden="true"></div>
+  <div class="container">
+    <ul class="stats__grid">
+      <li class="stat reveal">
+        <span class="stat__fig num" data-count="120" data-suffix="+">0</span>
+        <span class="stat__label" data-ar="علامة صُمّمت">Brands shaped</span>
+      </li>
+      <li class="stat reveal" data-delay="1">
+        <span class="stat__fig num" data-count="8">0</span>
+        <span class="stat__label" data-ar="سنوات من الحِرَفية">Years of craft</span>
+      </li>
+      <li class="stat reveal" data-delay="2">
+        <span class="stat__fig num" data-count="15">0</span>
+        <span class="stat__label" data-ar="قطاعاً">Industries</span>
+      </li>
+      <li class="stat reveal" data-delay="3">
+        <span class="stat__fig num" data-count="98" data-suffix="%">0</span>
+        <span class="stat__label" data-ar="نسبة بقاء العملاء">Client retention</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ CLIENT WALL ============ -->
+<section class="clients section" id="about">
+  <div class="container">
+    <p class="eyebrow clients__eyebrow reveal" data-ar="موثوقون عبر القطاعات">Trusted across industries</p>
+  </div>
+  <div class="marquee" id="clientMarquee" aria-label="Client logos">
+    <div class="marquee__track" id="marqueeTrack"></div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="quotes section">
+  <div class="container">
+    <div class="quotes__grid">
+      <figure class="quote reveal">
+        <div class="quote__mark" aria-hidden="true"></div>
+        <blockquote data-ar="«مارك لم تصمّم علامتنا فحسب — بل جعلت الناس يتذكّرونها.»">“MarQ didn’t just design our brand — they made people remember it.”</blockquote>
+        <figcaption><span class="quote__name" data-ar="سارة المنصوري">Sara Al-Mansoori</span><span class="quote__role" data-ar="المؤسِّسة، تِكان">Founder, Tikkan</span></figcaption>
+      </figure>
+      <figure class="quote reveal" data-delay="1">
+        <div class="quote__mark quote__mark--teal" aria-hidden="true"></div>
+        <blockquote data-ar="«عملوا كأنهم قسم العلامة لدينا، لا كمورّد. الفرق ظاهر في كل نقطة تواصل.»">“They worked like our brand department, not a vendor. You can feel the difference at every touchpoint.”</blockquote>
+        <figcaption><span class="quote__name" data-ar="عمر خليفة">Omar Khalifa</span><span class="quote__role" data-ar="الرئيس التنفيذي، فالكون فينتك">CEO, Falcon Fintech</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="cta section" id="contact">
+  <div class="cta__pattern" id="ctaPattern" aria-hidden="true"></div>
+  <div class="container cta__inner">
+    <p class="eyebrow cta__eyebrow reveal" data-ar="هل أنت مستعد لترك أثر؟">Ready to leave a mark?</p>
+    <h2 class="cta__head reveal" data-delay="1">
+      <span data-ar="لنبنِ علامة تستحق">Let’s build a brand worth</span>
+      <span class="cta__keyword" data-ar="أن تُذكر.">remembering.</span>
+    </h2>
+    <div class="cta__actions reveal" data-delay="2">
+      <a href="mailto:hello@marq.studio" class="btn btn--gold" data-ar="ابدأ مشروعك">Start a project <span class="arrow">→</span></a>
+      <div class="cta__contact">
+        <a href="mailto:hello@marq.studio" class="link-draw" dir="ltr">hello@marq.studio</a>
+        <a href="tel:+97444000000" class="link-draw" dir="ltr">+974 4400 0000</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <span class="logo logo--light logo--lg" dir="ltr">
+        <span class="logo__word"><span class="logo__m">M</span>ar<span class="logo__q">Q</span></span>
+        <span class="logo__tag">Branding Solutions</span>
+      </span>
+      <p class="footer__line" data-ar="نبني علامات تستحق أن تُذكر — من الدوحة إلى العالم.">A mark worth remembering — from Doha to the world.</p>
+    </div>
+
+    <nav class="footer__cols" aria-label="Footer">
+      <div class="footer__col">
+        <h4 data-ar="استكشف">Explore</h4>
+        <a href="#work" data-ar="أعمالنا">Work</a>
+        <a href="#services" data-ar="خدماتنا">Services</a>
+        <a href="#process" data-ar="منهجنا">Process</a>
+        <a href="#about" data-ar="من نحن">About</a>
+      </div>
+      <div class="footer__col">
+        <h4 data-ar="الشركة">Company</h4>
+        <a href="#contact" data-ar="تواصل">Contact</a>
+        <a href="#" data-ar="الوظائف">Careers</a>
+        <a href="#" data-ar="الخصوصية">Privacy</a>
+      </div>
+      <div class="footer__col footer__col--social">
+        <h4 data-ar="تابعنا">Follow</h4>
+        <a href="#" dir="ltr">Instagram</a>
+        <a href="#" dir="ltr">LinkedIn</a>
+        <a href="#" dir="ltr">Behance</a>
+      </div>
+    </nav>
+
+    <div class="footer__qr">
+      <div class="footer__qr-code" id="footerQr" aria-label="Linktree QR code"></div>
+      <span class="footer__qr-label" data-ar="كل روابطنا">All our links</span>
+    </div>
+  </div>
+
+  <div class="footer__base">
+    <div class="container footer__base-inner">
+      <span class="num" dir="ltr">© 2025 MarQ</span>
+      <span data-ar="تأسّست وتُقاد بإدارة مروان فنوش.">Founded &amp; led by <bdi dir="ltr">Marwan Fanoush</bdi>.</span>
+    </div>
+  </div>
+  <div class="footer__edge" id="footerEdge" aria-hidden="true"></div>
+</footer>
+
+<!-- Scripts -->
+<script src="assets/pattern.js"></script>
+<script src="assets/motion.js"></script>
+
+</body>
+</html>

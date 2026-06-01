@@ -1,0 +1,12 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Local tooling
+.claude/
+node_modules/
+
+# Design handoff bundle (reference only — not part of the deployed site)
+design_extract/
+design_index.html
