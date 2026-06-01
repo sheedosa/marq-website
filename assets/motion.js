@@ -205,14 +205,37 @@
   function initHeroVideo() {
     const v = $("#heroVideo");
     if (!v) return;
+    // Properties required for reliable autoplay + looping (more robust than
+    // attributes alone, which some browsers drop).
+    v.muted = true;
+    v.defaultMuted = true;
+    v.loop = true;
+    v.playsInline = true;
+
     if (reduceMotion) {
       // honor reduced-motion: hold a static frame instead of playing/looping
       v.removeAttribute("autoplay");
       v.pause();
       return;
     }
-    const p = v.play();
-    if (p && p.catch) p.catch(function () {});
+
+    const tryPlay = () => {
+      const p = v.play();
+      if (p && p.catch) p.catch(function () {});
+    };
+    // Play as soon as there's enough data, and immediately if already ready.
+    if (v.readyState >= 2) tryPlay();
+    v.addEventListener("loadeddata", tryPlay, { once: true });
+    v.addEventListener("canplay", tryPlay, { once: true });
+    // Guarantee looping even if a browser ignores the loop attribute.
+    v.addEventListener("ended", () => { v.currentTime = 0; tryPlay(); });
+    // If autoplay was blocked by policy, kick it off on the first interaction.
+    const kick = () => { tryPlay(); };
+    window.addEventListener("pointerdown", kick, { once: true });
+    window.addEventListener("scroll", kick, { once: true, passive: true });
+    window.addEventListener("keydown", kick, { once: true });
+    // Re-assert playback when the tab becomes visible again.
+    document.addEventListener("visibilitychange", () => { if (!document.hidden && !reduceMotion) tryPlay(); });
   }
 
   /* ---------------- Reveals ---------------- */
