@@ -62,10 +62,10 @@ export default function Hero() {
             margin: '-4rem -5rem',
           }} />
 
-          {/* framed eyebrow */}
+          {/* framed eyebrow — hidden on mobile so the headline owns the screen */}
           <motion.div
             variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } } }}
-            className="flex items-center justify-center gap-3 sm:gap-4 mb-6 md:mb-8"
+            className="hidden sm:flex items-center justify-center gap-3 sm:gap-4 mb-6 md:mb-8"
           >
             <span className="h-px w-6 sm:w-10 bg-brand-gold/60" />
             <span className="text-[11px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.35em] tracky font-bold text-brand-gold drop-shadow-[0_2px_8px_rgba(61,19,64,0.6)] whitespace-nowrap">
@@ -76,7 +76,7 @@ export default function Hero() {
 
           <motion.h1
             variants={{ hidden: { opacity: 0, y: 44 }, show: { opacity: 1, y: 0, transition: { duration: 1, ease: EASE } } }}
-            className="display font-display font-black italic uppercase tracking-tighter leading-[0.82] text-[clamp(3.5rem,15vw,13rem)] text-white drop-shadow-[0_6px_50px_rgba(61,19,64,0.8)]"
+            className="display font-display font-black italic uppercase tracking-tighter leading-[0.82] text-[clamp(4.25rem,20vw,7rem)] sm:text-[clamp(3.5rem,15vw,13rem)] text-white drop-shadow-[0_6px_50px_rgba(61,19,64,0.8)]"
           >
             {/* multi-word first line stacks one-per-line on mobile, joins on sm+ */}
             {c.head[0].split(' ').map((w, i) => (
