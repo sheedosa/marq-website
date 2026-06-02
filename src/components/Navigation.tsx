@@ -51,7 +51,7 @@ export default function Navigation() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-12 lg:px-24 py-6 flex justify-between items-center transition-colors duration-300 ${isDark ? 'text-white bg-brand-plum/70 backdrop-blur-md' : 'text-brand-plum bg-brand-gold/80 backdrop-blur-md'}`}
+        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-12 lg:px-24 py-6 flex justify-between items-center transition-colors duration-300 ${isDark ? 'text-white bg-brand-plum/50 backdrop-blur-md' : 'text-brand-plum bg-brand-gold/80 backdrop-blur-md'}`}
       >
         <Logo variant={theme} />
 
