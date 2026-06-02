@@ -1,8 +1,11 @@
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { useLang } from '../i18n';
 import { CONTENT } from '../content';
 import { fadeUp, fadeUpSm, stagger, staggerFast, viewport } from '../motion';
+
+const MotionLink = motion.create(Link);
 
 export default function Services() {
   const { lang } = useLang();
@@ -29,6 +32,15 @@ export default function Services() {
           <motion.p variants={fadeUpSm} className="mt-8 text-sm leading-relaxed opacity-85 border-s-2 ps-4 border-brand-plum max-w-sm font-medium">
             {c.intro}
           </motion.p>
+          <motion.div variants={fadeUpSm} className="mt-8">
+            <Link
+              to="/services"
+              className="group inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] tracky font-bold border-b-2 border-brand-plum/40 pb-1 hover:border-brand-plum transition-colors"
+            >
+              {lang === 'ar' ? 'كل الخدمات' : 'View all services'}
+              <ArrowUpRight size={14} className="rtl:-scale-x-100 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
         </motion.div>
 
         {/* service list */}
@@ -40,9 +52,9 @@ export default function Services() {
           className="lg:w-[58%] w-full flex flex-col"
         >
           {c.items.map((s) => (
-            <motion.a
+            <MotionLink
               key={s.num}
-              href="#work"
+              to="/services"
               variants={fadeUp}
               className="group border-b border-brand-plum/15 last:border-b-0 py-7 md:py-10 flex items-start justify-between gap-4 hover:border-brand-plum/40 transition-colors"
             >
@@ -62,7 +74,7 @@ export default function Services() {
               <div className="w-11 h-11 md:w-14 md:h-14 rounded-full border-2 border-brand-plum/25 flex items-center justify-center group-hover:border-brand-plum group-hover:bg-brand-plum group-hover:text-brand-teal transition-all duration-300 shrink-0 mt-1">
                 <ArrowUpRight size={22} className="rtl:-scale-x-100" />
               </div>
-            </motion.a>
+            </MotionLink>
           ))}
         </motion.div>
       </div>
