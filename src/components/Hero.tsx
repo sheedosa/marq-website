@@ -88,7 +88,7 @@ export default function Hero() {
             ))}
             <br />
             <span className="text-brand-teal drop-shadow-[0_4px_30px_rgba(0,171,189,0.35)]">{c.head[1]}</span>
-            {lang === 'en' && <span className="text-brand-gold">.</span>}
+            <span className="text-brand-gold">.</span>
           </motion.h1>
 
           <motion.p
