@@ -1,41 +1,46 @@
 import { useEffect, useRef } from 'react';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion } from 'motion/react';
 import { useLang } from '../i18n';
 import { CONTENT } from '../content';
 
 export default function Hero() {
   const { lang } = useLang();
   const c = CONTENT[lang].hero;
-  const reduce = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    // ensure muted is set as a DOM property (React's `muted` attr can be dropped → blocks autoplay)
+    // force muted as a DOM property (React's muted attr can be silently dropped → blocks autoplay)
     v.muted = true;
     v.defaultMuted = true;
     v.playsInline = true;
-    if (reduce) {
-      v.pause();
-      return;
-    }
-    const tryPlay = () => {
-      const p = v.play();
-      if (p && p.catch) p.catch(() => {});
-    };
+    v.loop = true;
+
+    const tryPlay = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+
+    // play immediately + on every readiness event
     tryPlay();
-    // start as soon as data is available, and as a fallback on first interaction
     v.addEventListener('loadeddata', tryPlay, { once: true });
     v.addEventListener('canplay', tryPlay, { once: true });
+
+    // fallback: first user interaction kicks it off (some browsers block even muted autoplay)
     const kick = () => tryPlay();
     window.addEventListener('pointerdown', kick, { once: true });
     window.addEventListener('scroll', kick, { once: true, passive: true });
+    window.addEventListener('keydown', kick, { once: true });
+
+    // if the tab was backgrounded and the video paused, resume on focus
+    const onVis = () => { if (!document.hidden) tryPlay(); };
+    document.addEventListener('visibilitychange', onVis);
+
     return () => {
       window.removeEventListener('pointerdown', kick);
       window.removeEventListener('scroll', kick);
+      window.removeEventListener('keydown', kick);
+      document.removeEventListener('visibilitychange', onVis);
     };
-  }, [reduce]);
+  }, []);
 
   return (
     <section id="top" className="relative min-h-screen flex items-center pt-28 pb-16 px-6 md:px-12 lg:px-24 overflow-hidden">
