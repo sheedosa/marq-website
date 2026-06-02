@@ -62,7 +62,7 @@ export default function Services() {
                 <div className="flex items-baseline gap-4 md:gap-8">
                   <span className="text-xs font-black text-brand-plum/30 group-hover:text-brand-plum/60 transition-colors font-display shrink-0">{s.num}</span>
                   <div className="min-w-0">
-                    <h3 className="display text-2xl sm:text-3xl md:text-5xl font-black uppercase italic tracking-tighter group-hover:translate-x-2 rtl:group-hover:-translate-x-2 transition-transform duration-300 font-display truncate">
+                    <h3 className="display text-2xl sm:text-3xl md:text-5xl font-black uppercase italic tracking-tighter group-hover:translate-x-2 rtl:group-hover:-translate-x-2 transition-transform duration-300 font-display text-balance">
                       {s.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-brand-plum/60 mt-2 leading-relaxed max-w-sm group-hover:text-brand-plum/80 transition-colors">
