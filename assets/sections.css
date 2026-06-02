@@ -116,7 +116,7 @@ body.menu-open { overflow: hidden; }
   padding-top: .5em; position: relative;
 }
 .section-index::after { content: ""; display: block; width: 26px; height: 2px; background: var(--gold-ink); margin-top: 12px; opacity: .7; }
-.section-title { font-size: var(--fs-h2); color: var(--plum-900); margin-top: 12px; text-wrap: balance; max-width: 18ch; }
+.section-title { font-size: var(--fs-h2); color: var(--plum-900); margin-top: 12px; text-wrap: balance; max-width: 18ch; letter-spacing: -0.035em; }
 .section-head__intro { color: var(--muted); font-size: clamp(1rem, 1.1vw, 1.12rem); max-width: 40ch; line-height: 1.6; }
 .section-head--split { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(24px, 4vw, 72px); align-items: end; }
 .section-head--split .section-title { max-width: 15ch; }
@@ -227,13 +227,20 @@ html[lang="ar"] .hero__caps li { letter-spacing: 0; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ============ WHY ============ */
-.why { background: var(--plum-700); color: var(--white); text-align: center; overflow: clip; }
+.why { background: var(--plum-700); color: var(--white); text-align: start; overflow: clip; }
+.why .container { position: relative; z-index: 1; }
+/* oversized geometric accent — editorial depth, bleeds off the trailing edge */
+.why::after {
+  content: ""; position: absolute; inset-block-start: 14%; inset-inline-end: -5%;
+  width: clamp(140px, 20vw, 320px); aspect-ratio: 1; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.12); pointer-events: none;
+}
 .why__strip { position: absolute; inset-block-start: 0; inset-inline: 0; height: 26px; opacity: .85; }
-.why__eyebrow { color: var(--teal-300); margin-bottom: clamp(28px,4vw,48px); }
+.why__eyebrow { color: var(--teal-300); margin-bottom: clamp(24px,3.5vw,42px); }
 .why__statement {
-  font-family: var(--font-display); font-weight: 600;
-  font-size: clamp(1.6rem, 3.6vw, 3rem); line-height: 1.28;
-  letter-spacing: -0.02em; max-width: 20ch; margin-inline: auto;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(2rem, 5vw, 4rem); line-height: 1.16;
+  letter-spacing: -0.03em; max-width: 24ch; margin-inline: 0;
   text-wrap: balance;
 }
 .why__statement em { font-style: normal; color: var(--gold-500); }
@@ -454,6 +461,35 @@ body.preloading { overflow: hidden; }
 html[dir="rtl"] .hero__scroll-line::after { animation-name: scrollLineRtl; }
 @keyframes scrollLineRtl { 0%{transform:translateX(100%)} 50%{transform:translateX(0)} 100%{transform:translateX(-100%)} }
 html[dir="rtl"] .link-draw::after { transform-origin: right; }
+
+/* ============ STATEMENT TICKER ============ */
+.ticker {
+  background: var(--plum-900); color: var(--off-white);
+  padding-block: clamp(18px, 2.4vw, 32px);
+  overflow: hidden; position: relative;
+  border-block: 1px solid rgba(255,255,255,.08);
+}
+.ticker__track {
+  display: flex; align-items: center; width: max-content;
+  animation: ticker 34s linear infinite; will-change: transform;
+}
+.ticker:hover .ticker__track { animation-play-state: paused; }
+.ticker__item {
+  display: inline-flex; align-items: center; gap: clamp(26px, 3.6vw, 60px);
+  padding-inline: clamp(13px, 1.8vw, 30px);
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(1.5rem, 3.6vw, 3.2rem); letter-spacing: -0.02em; line-height: 1;
+  white-space: nowrap; color: rgba(250,247,250,.42);
+  transition: color .35s var(--ease-out);
+}
+.ticker__item em { font-style: normal; color: var(--gold-500); }
+.ticker:hover .ticker__item { color: rgba(250,247,250,.7); }
+.ticker__sep { width: clamp(13px, 1.5vw, 20px); height: clamp(13px, 1.5vw, 20px); flex: none; display: inline-flex; }
+.ticker__sep svg { width: 100%; height: 100%; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+html[dir="rtl"] .ticker__track { animation-name: ticker-rtl; }
+@keyframes ticker-rtl { to { transform: translateX(50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker__track { animation: none; } }
 
 /* ============ ATMOSPHERE: scroll progress + film grain ============ */
 .scroll-progress {

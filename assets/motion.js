@@ -423,6 +423,29 @@
     refill: fillPatterns,
   };
 
+  /* ---------------- Statement ticker ---------------- */
+  function initTicker() {
+    const track = $("#tickerTrack");
+    if (!track || !P) return;
+    const phrases = [
+      "A mark worth <em>remembering</em>",
+      "More than a logo",
+      "Built to be <em>recognised</em>",
+      "Strategy · Identity · Digital",
+      "Leave a <em>mark</em>",
+    ];
+    const seps = [
+      P.tile("circle", { fg: P.COLORS.gold700, size: 20 }),
+      P.tile("triangle", { fg: P.COLORS.teal700, size: 20 }),
+      P.tile("semi", { fg: P.COLORS.gold500, size: 20 }),
+    ];
+    let html = "";
+    phrases.forEach((p, i) => {
+      html += '<span class="ticker__item">' + p + '</span><span class="ticker__sep">' + seps[i % seps.length] + "</span>";
+    });
+    track.innerHTML = html + html; // duplicate for a seamless -50% loop
+  }
+
   /* ---------------- Scroll progress ---------------- */
   function initScrollProgress() {
     const bar = $(".scroll-progress span");
@@ -529,6 +552,7 @@
     initProcessLine();
     initCounters();
     initMarquee();
+    initTicker();
     initParallax();
     initMosaicDrift();
     initScrollProgress();
