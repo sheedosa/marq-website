@@ -12,7 +12,7 @@ export default function App() {
     <MotionConfig reducedMotion="user">
       <div
         dir={dir}
-        className={`min-h-screen bg-brand-plum text-white ${lang === 'ar' ? 'font-ar' : 'font-sans'} selection:bg-brand-teal selection:text-brand-plum overflow-x-hidden`}
+        className={`min-h-screen text-white ${lang === 'ar' ? 'font-ar' : 'font-sans'} selection:bg-brand-teal selection:text-brand-plum overflow-x-hidden`}
       >
         <Navigation />
         <main>

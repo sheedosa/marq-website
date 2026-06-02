@@ -39,8 +39,8 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative min-h-screen flex items-center pt-28 pb-16 px-6 md:px-12 lg:px-24 overflow-hidden">
-      {/* full-bleed hero video — pure, no overlay (autoplay + loop + muted) */}
-      <div className="absolute inset-0 -z-10">
+      {/* full-bleed hero video — z-0, content sits above at z-10 */}
+      <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
           className="w-full h-full object-cover"
@@ -55,7 +55,7 @@ export default function Hero() {
       </div>
 
       {/* vertical rail */}
-      <div className="absolute end-0 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-10 py-12 px-6 border-s border-brand-teal/20">
+      <div className="absolute end-0 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-10 py-12 px-6 border-s border-brand-teal/20 z-10">
         <div className="rotate-90 origin-center whitespace-nowrap text-[10px] tracking-[0.4em] tracky uppercase font-bold opacity-50">{c.tagB}</div>
         <div className="w-px h-24 bg-gradient-to-b from-brand-teal to-transparent opacity-60" />
         <div className="flex flex-col gap-4">
@@ -65,7 +65,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto w-full hero-legible">
+      <div className="max-w-7xl mx-auto w-full hero-legible relative z-10">
         {/* tags */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

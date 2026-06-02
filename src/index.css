@@ -14,6 +14,7 @@
 }
 
 html { scroll-behavior: smooth; }
+body { background-color: #581D5A; /* plum fallback for below-footer / between sections */ }
 
 /* Arabic: use the Arabic family and drop italic/uppercase (Arabic has neither);
    give Arabic a little more leading for legibility. */
