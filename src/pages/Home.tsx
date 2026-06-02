@@ -13,7 +13,7 @@ export default function Home() {
       <Services />
       <Process />
       <Work />
-      <FinalCta />
+      <FinalCta tone="gold" />
     </>
   );
 }
