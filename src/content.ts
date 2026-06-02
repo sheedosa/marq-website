@@ -7,7 +7,7 @@ export const CONTENT = {
     hero: {
       tagA: 'Branding Studio',
       tagB: 'Tripoli, Libya',
-      head: ['Make Your', 'Mark'],
+      head: ['Make Your', 'Marq'],
       lead: 'A Libyan branding studio.',
       sub: 'MarQ is a Libyan branding studio that transforms ambitious ideas into identities people recognise, trust, and remember.',
       locLabel: 'Base of Operations',
