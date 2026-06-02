@@ -5,9 +5,10 @@ export const CONTENT = {
   en: {
     nav: { services: 'Services', work: 'Work', studio: 'Studio', cta: "Let's Talk" },
     hero: {
-      tagA: 'Branding Solutions',
-      tagB: 'Libya · 2026',
-      head: ['Brands', 'Remembered'],
+      tagA: 'Branding Studio',
+      tagB: 'Tripoli, Libya',
+      head: ['Make Your', 'Mark'],
+      lead: 'A Libyan branding studio.',
       sub: 'MarQ is a Libyan branding studio that transforms ambitious ideas into identities people recognise, trust, and remember.',
       locLabel: 'Base of Operations',
       locValue: 'Tripoli, Libya',
@@ -58,9 +59,10 @@ export const CONTENT = {
   ar: {
     nav: { services: 'خدماتنا', work: 'أعمالنا', studio: 'الاستوديو', cta: 'لنتحدّث' },
     hero: {
-      tagA: 'حلول العلامات التجارية',
-      tagB: 'ليبيا · 2026',
-      head: ['علامات', 'تُذكر'],
+      tagA: 'استوديو علامات تجارية',
+      tagB: 'طرابلس',
+      head: ['اترك', 'أثرك'],
+      lead: 'استوديو ليبي للعلامات التجارية.',
       sub: 'MarQ استوديو ليبي للعلامات التجارية — نحوّل الأفكار الطموحة إلى هويات يتعرّف عليها الناس، ويثقون بها، ويتذكّرونها.',
       locLabel: 'مقرّ العمل',
       locValue: 'طرابلس، ليبيا',
