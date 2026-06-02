@@ -44,9 +44,10 @@ export default function Hero() {
           </video>
           {/* inset vignette frame */}
           <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 140px 80px rgba(61,19,64,0.5)' }} />
-          {/* layered scrim: faint top fade for nav + grounding bottom-up gradient for headline/scroll hint */}
+          {/* seamless layered scrim: strong centre darkening behind the headline (no box seam) +
+             grounding top/bottom fades — keeps the video visible at the edges while the type pops */}
           <div className="absolute inset-0 z-[5] pointer-events-none" style={{
-            background: 'linear-gradient(to top, rgba(61,19,64,0.65) 0%, transparent 38%), linear-gradient(to bottom, rgba(61,19,64,0.4) 0%, transparent 22%)',
+            background: 'radial-gradient(ellipse 72% 68% at 50% 44%, rgba(61,19,64,0.9) 0%, rgba(61,19,64,0.58) 40%, rgba(61,19,64,0.2) 72%, transparent 100%), linear-gradient(to top, rgba(61,19,64,0.72) 0%, transparent 42%), linear-gradient(to bottom, rgba(61,19,64,0.5) 0%, transparent 26%)',
           }} />
         </div>
 
@@ -57,11 +58,6 @@ export default function Hero() {
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.15, delayChildren: 0.15 } } }}
           className="relative z-10 text-center px-6 max-w-6xl"
         >
-          <div className="absolute inset-0 -z-10 pointer-events-none" style={{
-            background: 'radial-gradient(ellipse 80% 70% at 50% 45%, rgba(61,19,64,0.9) 0%, rgba(61,19,64,0.55) 50%, transparent 100%)',
-            margin: '-4rem -5rem',
-          }} />
-
           {/* framed eyebrow — hidden on mobile so the headline owns the screen */}
           <motion.div
             variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } } }}
