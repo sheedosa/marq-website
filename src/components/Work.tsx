@@ -22,7 +22,7 @@ export default function Work() {
           <div>
             <motion.div variants={fadeUpSm} className="flex items-center gap-4 mb-4">
               <span className="text-4xl md:text-6xl font-black text-brand-teal font-display">{c.index}</span>
-              <span className="text-[9px] uppercase tracking-[0.2em] tracky leading-tight font-bold text-white/40">{c.kicker}</span>
+              <span className="text-[10px] uppercase tracking-[0.2em] tracky leading-tight font-bold text-white/55">{c.kicker}</span>
             </motion.div>
             <motion.h2 variants={fadeUp} className="display text-[15vw] sm:text-7xl md:text-[7.5rem] font-black uppercase tracking-tighter leading-[0.82] italic text-white font-display">
               {c.head[0]}<br />
@@ -61,7 +61,7 @@ export default function Work() {
                 </div>
                 <div className="absolute inset-0 bg-brand-teal/0 group-hover:bg-brand-teal/10 transition-colors duration-500" />
                 <div className="absolute bottom-5 start-5 end-5 flex justify-between items-end">
-                  <span className="text-[9px] uppercase tracking-[0.2em] tracky font-bold text-white/50">{p.year}</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] tracky font-bold text-white/50">{p.year}</span>
                   <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-brand-gold group-hover:border-brand-gold group-hover:text-brand-plum">
                     <ArrowUpRight size={18} className="rtl:-scale-x-100" />
                   </div>

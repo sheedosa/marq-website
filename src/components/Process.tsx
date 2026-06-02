@@ -25,10 +25,11 @@ export default function Process() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 md:gap-6"
+          className="relative grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-6"
         >
-          {/* connecting line (desktop) — sits behind the numbered nodes */}
+          {/* connecting line — horizontal on desktop, vertical timeline on mobile; sits behind the nodes */}
           <div className="hidden md:block absolute top-8 inset-x-0 h-px bg-white/15" aria-hidden="true" />
+          <div className="md:hidden absolute top-8 bottom-8 start-8 w-px bg-white/15" aria-hidden="true" />
 
           {c.steps.map((s) => (
             <motion.div key={s.num} variants={fadeUp} className="relative">

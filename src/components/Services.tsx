@@ -24,7 +24,7 @@ export default function Services() {
         >
           <motion.div variants={fadeUpSm} className="flex items-center gap-4 mb-4">
             <span className="text-4xl md:text-6xl font-black opacity-70 font-display">{c.index}</span>
-            <span className="text-[9px] uppercase tracking-[0.2em] tracky leading-tight font-bold">{c.kicker}</span>
+            <span className="text-[10px] uppercase tracking-[0.2em] tracky leading-tight font-bold">{c.kicker}</span>
           </motion.div>
           <motion.h2 variants={fadeUp} className="display text-[14vw] sm:text-7xl md:text-[5.5rem] font-black uppercase tracking-tighter leading-[0.82] italic font-display">
             {c.head[0]}<br /><span className="text-white/80">{c.head[1]}</span>

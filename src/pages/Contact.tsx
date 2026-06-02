@@ -15,17 +15,23 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', company: '', budget: f.budgetOptions[0], message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
+  const [invalid, setInvalid] = useState<Record<string, boolean>>({});
 
-  const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+  const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [k]: e.target.value }));
+    if (invalid[k]) setInvalid((prev) => ({ ...prev, [k]: false }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+    const miss = { name: !form.name.trim(), email: !form.email.trim(), message: !form.message.trim() };
+    if (miss.name || miss.email || miss.message) {
+      setInvalid(miss);
       setError(true);
       return;
     }
     setError(false);
+    setInvalid({});
     const subject = encodeURIComponent(`New enquiry — ${form.name}${form.company ? ` (${form.company})` : ''}`);
     const body = encodeURIComponent(
       `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nBudget: ${form.budget}\n\n${form.message}`,
@@ -35,14 +41,15 @@ export default function Contact() {
   };
 
   const inputCls =
-    'w-full bg-white/5 border border-white/20 rounded-md px-4 py-3 text-white placeholder-white/40 text-sm focus:border-brand-teal focus:outline-none focus:ring-1 focus:ring-brand-teal transition-colors';
+    'w-full bg-white/5 border border-white/20 rounded-md px-4 py-3 text-white placeholder-white/50 text-sm focus:border-brand-teal focus:outline-none focus:ring-1 focus:ring-brand-teal transition-colors';
+  const fieldCls = (k: string) => `${inputCls} ${invalid[k] ? 'border-red-400 ring-1 ring-red-400' : ''}`;
 
   return (
     <section className="bg-brand-plum-900 text-white pt-36 md:pt-44 pb-24 md:pb-32 px-6 md:px-12 lg:px-24 relative z-10 overflow-hidden min-h-screen">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20">
         {/* left: headline + details */}
         <motion.div variants={stagger} initial="hidden" animate="show">
-          <motion.span variants={fadeUpSm} className="block text-[9px] uppercase tracking-[0.3em] tracky font-bold text-brand-gold mb-6">
+          <motion.span variants={fadeUpSm} className="block text-[10px] uppercase tracking-[0.3em] tracky font-bold text-brand-gold mb-6">
             {c.kicker}
           </motion.span>
           <motion.h1
@@ -58,20 +65,20 @@ export default function Contact() {
 
           <motion.div variants={fadeUpSm} className="mt-12 flex flex-col gap-6 text-sm">
             <div className="flex flex-col gap-1">
-              <span className="text-[9px] uppercase tracking-[0.2em] tracky text-white/40 font-bold">{c.emailLabel}</span>
+              <span className="text-[10px] uppercase tracking-[0.2em] tracky text-white/55 font-bold">{c.emailLabel}</span>
               <a href={`mailto:${footer.email}`} dir="ltr" className="text-lg font-bold hover:text-brand-teal transition-colors inline-block">{footer.email}</a>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[9px] uppercase tracking-[0.2em] tracky text-white/40 font-bold">{c.phoneLabel}</span>
+              <span className="text-[10px] uppercase tracking-[0.2em] tracky text-white/55 font-bold">{c.phoneLabel}</span>
               <a href={`tel:${footer.phone.replace(/\s/g, '')}`} dir="ltr" className="text-lg font-bold hover:text-brand-teal transition-colors inline-block">{footer.phone}</a>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[9px] uppercase tracking-[0.2em] tracky text-white/40 font-bold">{c.locationLabel}</span>
+              <span className="text-[10px] uppercase tracking-[0.2em] tracky text-white/55 font-bold">{c.locationLabel}</span>
               <span className="text-lg font-bold">{hero.locValue}</span>
-              <span dir="ltr" className="text-[11px] font-mono text-white/40 inline-block">{hero.coords}</span>
+              <span dir="ltr" className="text-[11px] font-mono text-white/55 inline-block">{hero.coords}</span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[9px] uppercase tracking-[0.2em] tracky text-white/40 font-bold">{c.followLabel}</span>
+              <span className="text-[10px] uppercase tracking-[0.2em] tracky text-white/55 font-bold">{c.followLabel}</span>
               <nav dir="ltr" className="flex gap-6 text-sm font-bold">
                 {footer.socials.map((s) => (
                   <a key={s} href="#" className="hover:text-brand-teal transition-colors">{s}</a>
@@ -93,8 +100,8 @@ export default function Contact() {
           ) : (
             <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <input className={inputCls} type="text" placeholder={f.name} value={form.name} onChange={set('name')} aria-label={f.name} />
-                <input className={inputCls} type="email" placeholder={f.email} value={form.email} onChange={set('email')} aria-label={f.email} />
+                <input className={fieldCls('name')} type="text" placeholder={f.name} value={form.name} onChange={set('name')} aria-label={f.name} aria-invalid={!!invalid.name} />
+                <input className={fieldCls('email')} type="email" placeholder={f.email} value={form.email} onChange={set('email')} aria-label={f.email} aria-invalid={!!invalid.email} />
               </div>
               <input className={inputCls} type="text" placeholder={f.company} value={form.company} onChange={set('company')} aria-label={f.company} />
               <select className={`${inputCls} appearance-none`} value={form.budget} onChange={set('budget')} aria-label={f.budget}>
@@ -102,9 +109,9 @@ export default function Contact() {
                   <option key={o} value={o} className="bg-brand-plum-900 text-white">{o}</option>
                 ))}
               </select>
-              <textarea className={`${inputCls} resize-none`} rows={5} placeholder={f.message} value={form.message} onChange={set('message')} aria-label={f.message} />
+              <textarea className={`${fieldCls('message')} resize-none`} rows={5} placeholder={f.message} value={form.message} onChange={set('message')} aria-label={f.message} aria-invalid={!!invalid.message} />
 
-              {error && <p className="text-sm text-brand-gold">{f.required}</p>}
+              {error && <p className="text-sm text-red-400">{f.required}</p>}
 
               <button
                 type="submit"

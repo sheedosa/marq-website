@@ -35,7 +35,7 @@ export default function Footer() {
     Behance: <Behance size={16} />,
   };
 
-  const label = 'text-[9px] uppercase tracking-[0.2em] tracky font-bold text-brand-gold mb-5';
+  const label = 'text-[10px] uppercase tracking-[0.2em] tracky font-bold text-brand-gold mb-5';
   const linkCls = 'text-sm text-white/65 hover:text-brand-teal transition-colors duration-200 w-fit';
 
   return (
@@ -76,7 +76,7 @@ export default function Footer() {
               <a href={`tel:${c.phone.replace(/\s/g, '')}`} dir="ltr" className={linkCls}>{c.phone}</a>
               <div className="mt-1">
                 <p className="text-sm text-white/65">{hero.locValue}</p>
-                <p dir="ltr" className="text-[11px] font-mono text-white/35 mt-0.5">{hero.coords}</p>
+                <p dir="ltr" className="text-[11px] font-mono text-white/55 mt-0.5">{hero.coords}</p>
               </div>
             </div>
           </motion.div>
@@ -102,7 +102,7 @@ export default function Footer() {
         {/* bottom bar */}
         <motion.div
           variants={fadeUpSm}
-          className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] uppercase tracking-[0.2em] tracky text-white/40 font-bold"
+          className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] uppercase tracking-[0.2em] tracky text-white/55 font-bold"
         >
           <p>{c.copyright}</p>
           <p className="flex items-center gap-2">

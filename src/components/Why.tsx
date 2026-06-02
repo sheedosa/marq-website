@@ -10,7 +10,7 @@ export default function Why() {
   return (
     <section id="why" className="bg-brand-plum text-white py-28 md:py-44 px-6 md:px-12 lg:px-24 relative z-10 overflow-hidden">
       <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={viewport} className="max-w-6xl mx-auto">
-        <motion.span variants={fadeUpSm} className="block text-[9px] uppercase tracking-[0.3em] tracky font-bold text-brand-gold mb-8">
+        <motion.span variants={fadeUpSm} className="block text-[10px] uppercase tracking-[0.3em] tracky font-bold text-brand-gold mb-8">
           {c.kicker}
         </motion.span>
 

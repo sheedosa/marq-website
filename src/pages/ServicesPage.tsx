@@ -15,7 +15,7 @@ export default function ServicesPage() {
       {/* page hero */}
       <section className="bg-brand-plum-900 text-white pt-36 md:pt-44 pb-20 md:pb-28 px-6 md:px-12 lg:px-24 relative z-10 overflow-hidden">
         <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-6xl mx-auto">
-          <motion.span variants={fadeUpSm} className="block text-[9px] uppercase tracking-[0.3em] tracky font-bold text-brand-gold mb-6">
+          <motion.span variants={fadeUpSm} className="block text-[10px] uppercase tracking-[0.3em] tracky font-bold text-brand-gold mb-6">
             {sp.kicker}
           </motion.span>
           <motion.h1
@@ -55,7 +55,7 @@ export default function ServicesPage() {
                 </motion.p>
               </div>
               <motion.div variants={fadeUpSm} className="md:col-span-6">
-                <span className="block text-[9px] uppercase tracking-[0.2em] tracky font-bold text-brand-gold mb-4">{sp.deliverablesLabel}</span>
+                <span className="block text-[10px] uppercase tracking-[0.2em] tracky font-bold text-brand-gold mb-4">{sp.deliverablesLabel}</span>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
                   {sp.items[i].deliverables.map((d) => (
                     <li key={d} className="flex items-start gap-3 text-sm text-white/80">

@@ -13,7 +13,7 @@ export default function About() {
       {/* page hero */}
       <section className="bg-brand-plum-900 text-white pt-36 md:pt-44 pb-20 md:pb-28 px-6 md:px-12 lg:px-24 relative z-10 overflow-hidden">
         <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-6xl mx-auto">
-          <motion.span variants={fadeUpSm} className="block text-[9px] uppercase tracking-[0.3em] tracky font-bold text-brand-gold mb-6">
+          <motion.span variants={fadeUpSm} className="block text-[10px] uppercase tracking-[0.3em] tracky font-bold text-brand-gold mb-6">
             {c.kicker}
           </motion.span>
           <motion.h1
@@ -48,7 +48,7 @@ export default function About() {
             initial="hidden"
             whileInView="show"
             viewport={viewport}
-            className="block text-[9px] uppercase tracking-[0.2em] tracky font-bold mb-12 md:mb-16"
+            className="block text-[10px] uppercase tracking-[0.2em] tracky font-bold mb-12 md:mb-16"
           >
             {c.valuesKicker}
           </motion.span>

@@ -108,7 +108,7 @@ export default function Hero() {
           className="absolute bottom-10 z-10 flex flex-col items-center gap-2 text-white/50 hover:text-white transition-colors"
           aria-label={c.scroll}
         >
-          <span className="text-[9px] uppercase tracking-[0.3em] tracky font-bold">{c.scroll}</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] tracky font-bold">{c.scroll}</span>
           <ChevronDown size={18} className="animate-bounce" />
         </motion.a>
       </section>
@@ -120,24 +120,24 @@ export default function Hero() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 items-center"
+          className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 items-center"
         >
-          <motion.p variants={fadeUpSm} className="sm:col-span-2 lg:col-span-5 text-sm leading-relaxed text-white/75 border-s-2 ps-4 border-brand-teal max-w-lg">
+          <motion.p variants={fadeUpSm} className="col-span-2 lg:col-span-5 text-sm leading-relaxed text-white/75 border-s-2 ps-4 border-brand-teal max-w-lg">
             {c.sub}
           </motion.p>
 
-          <motion.div variants={fadeUpSm} className="lg:col-span-3 flex flex-col gap-0.5">
-            <span className="text-[9px] uppercase tracking-[0.2em] tracky text-white/35 font-bold">{c.locLabel}</span>
+          <motion.div variants={fadeUpSm} className="col-span-1 lg:col-span-3 flex flex-col gap-0.5">
+            <span className="text-[10px] uppercase tracking-[0.2em] tracky text-white/55 font-bold">{c.locLabel}</span>
             <span className="text-base font-bold text-white">{c.locValue}</span>
-            <span dir="ltr" className="text-[10px] font-mono text-white/40 inline-block">{c.coords}</span>
+            <span dir="ltr" className="text-[10px] font-mono text-white/55 inline-block">{c.coords}</span>
           </motion.div>
 
-          <motion.div variants={fadeUpSm} className="lg:col-span-2 flex flex-col">
+          <motion.div variants={fadeUpSm} className="col-span-1 lg:col-span-2 flex flex-col">
             <span dir="ltr" className="text-3xl sm:text-4xl font-black text-brand-gold font-display leading-none">{c.statNum}</span>
-            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] tracky font-bold text-white/50 mt-1">{c.statLabel}</span>
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] tracky font-bold text-white/50 mt-1">{c.statLabel}</span>
           </motion.div>
 
-          <motion.div variants={fadeUpSm} className="lg:col-span-2 flex justify-start lg:justify-end">
+          <motion.div variants={fadeUpSm} className="col-span-2 lg:col-span-2 flex justify-start lg:justify-end">
             <a
               href="#services"
               className="text-[10px] uppercase tracking-[0.15em] tracky font-bold text-brand-gold border border-brand-gold/40 rounded-full px-7 py-3 hover:bg-brand-gold hover:text-brand-plum transition-colors duration-300"

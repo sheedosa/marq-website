@@ -36,7 +36,7 @@ export default function FinalCta({ tone = 'dark' }: Props) {
       >
         <motion.span
           variants={fadeUpSm}
-          className={`block text-[9px] uppercase tracking-[0.3em] tracky font-bold mb-8 ${gold ? 'text-brand-plum/70' : 'text-brand-teal'}`}
+          className={`block text-[10px] uppercase tracking-[0.3em] tracky font-bold mb-8 ${gold ? 'text-brand-plum/70' : 'text-brand-teal'}`}
         >
           {c.kicker}
         </motion.span>
@@ -57,7 +57,7 @@ export default function FinalCta({ tone = 'dark' }: Props) {
         <motion.div variants={fadeUpSm}>
           <Link
             to="/contact"
-            className={`group inline-flex items-center gap-3 text-xs uppercase tracking-[0.2em] tracky font-bold rounded-full px-9 py-4 transition-colors duration-300 ${
+            className={`group inline-flex items-center gap-3 text-xs uppercase tracking-[0.2em] tracky font-bold rounded-full px-9 py-4 transition-all duration-300 hover:-translate-y-0.5 ${
               gold ? 'bg-brand-plum text-white hover:bg-brand-plum-900' : 'bg-brand-gold text-brand-plum hover:bg-white'
             }`}
           >

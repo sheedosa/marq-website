@@ -39,7 +39,7 @@ export default function SectionHeading({
     <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={viewport} className={className}>
       <motion.div variants={fadeUpSm} className="flex items-center gap-4 mb-4">
         {index && <span className="text-4xl md:text-6xl font-black opacity-50 font-display leading-none">{index}</span>}
-        <span className="text-[9px] uppercase tracking-[0.2em] tracky leading-tight font-bold opacity-80">{kicker}</span>
+        <span className="text-[10px] uppercase tracking-[0.2em] tracky leading-tight font-bold opacity-80">{kicker}</span>
       </motion.div>
       <motion.h2
         variants={fadeUp}
