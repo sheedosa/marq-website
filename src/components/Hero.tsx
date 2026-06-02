@@ -12,8 +12,29 @@ export default function Hero() {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    if (reduce) v.pause();
-    else v.play().catch(() => {});
+    // ensure muted is set as a DOM property (React's `muted` attr can be dropped → blocks autoplay)
+    v.muted = true;
+    v.defaultMuted = true;
+    v.playsInline = true;
+    if (reduce) {
+      v.pause();
+      return;
+    }
+    const tryPlay = () => {
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+    };
+    tryPlay();
+    // start as soon as data is available, and as a fallback on first interaction
+    v.addEventListener('loadeddata', tryPlay, { once: true });
+    v.addEventListener('canplay', tryPlay, { once: true });
+    const kick = () => tryPlay();
+    window.addEventListener('pointerdown', kick, { once: true });
+    window.addEventListener('scroll', kick, { once: true, passive: true });
+    return () => {
+      window.removeEventListener('pointerdown', kick);
+      window.removeEventListener('scroll', kick);
+    };
   }, [reduce]);
 
   return (
