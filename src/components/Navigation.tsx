@@ -5,25 +5,25 @@ import { useLang } from '../i18n';
 import { CONTENT } from '../content';
 import Logo from './Logo';
 
-// which section sits under the nav → light text (dark bg) vs dark text (light bg)
-const THEME: Record<string, 'dark' | 'light'> = {
-  top: 'dark', // plum hero
-  services: 'light', // teal
-  work: 'dark', // plum
-  studio: 'light', // gold footer
+// which section sits under the nav → white logo+text (plum/teal bg) vs colour logo + plum text (gold footer)
+const THEME: Record<string, 'white' | 'color'> = {
+  top: 'white', // plum hero
+  services: 'white', // teal — white reads cleanest, keeps the tagline visible
+  work: 'white', // plum
+  studio: 'color', // gold footer — full-colour logo + plum text
 };
 
 export default function Navigation() {
   const { lang, toggle } = useLang();
   const c = CONTENT[lang].nav;
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [theme, setTheme] = useState<'white' | 'color'>('white');
 
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) setTheme(THEME[(e.target as HTMLElement).id] || 'dark');
+          if (e.isIntersecting) setTheme(THEME[(e.target as HTMLElement).id] || 'white');
         });
       },
       { rootMargin: '-64px 0px -94% 0px' }, // a thin band just below the nav
@@ -35,7 +35,7 @@ export default function Navigation() {
     return () => io.disconnect();
   }, []);
 
-  const isDark = theme === 'dark';
+  const isDark = theme === 'white';
 
   const links = (
     <>
@@ -53,7 +53,7 @@ export default function Navigation() {
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-12 lg:px-24 py-6 flex justify-between items-center transition-colors duration-300 ${isDark ? 'text-white' : 'text-brand-plum'}`}
       >
-        <Logo accent={isDark ? 'teal' : 'current'} />
+        <Logo variant={theme} />
 
         <div className="hidden md:flex items-center gap-10 text-[11px] uppercase tracking-[0.2em] tracky font-bold">
           {links}
