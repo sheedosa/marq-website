@@ -491,6 +491,44 @@ html[dir="rtl"] .ticker__track { animation-name: ticker-rtl; }
 @keyframes ticker-rtl { to { transform: translateX(50%); } }
 @media (prefers-reduced-motion: reduce) { .ticker__track { animation: none; } }
 
+/* ============ ICONS (custom geometric line set) ============ */
+.ico { display: inline-flex; align-items: center; justify-content: center; width: 1.15em; height: 1.15em; flex: none; color: inherit; vertical-align: -0.18em; line-height: 0; }
+.ico svg { width: 100%; height: 100%; display: block; }
+
+/* Service-card icon badge */
+.svc-card__title .ico--badge {
+  width: 40px; height: 40px; padding: 8px; border-radius: var(--radius-md);
+  background: var(--plum-100); color: var(--plum-700);
+  transition: background-color .4s var(--ease-out), color .4s var(--ease-out), transform .4s var(--ease-out);
+}
+.svc-card:hover .ico--badge { background: var(--teal-100); color: var(--teal-ink); transform: translateY(-3px); }
+.svc-card--feature .ico--badge { background: rgba(255,255,255,.10); color: var(--teal-300); }
+.svc-card--feature:hover .ico--badge { background: rgba(255,255,255,.18); color: var(--white); }
+/* gold spark pulses on hover */
+.ico--badge svg circle[fill] { transform-box: fill-box; transform-origin: center; transition: transform .45s var(--ease-out); }
+.svc-card:hover .ico--badge svg circle[fill] { transform: scale(1.6); }
+
+/* Process step icon — a "station" on the gold journey line */
+.process__step .ico--step { width: 30px; height: 30px; color: var(--teal-ink); display: block; margin: 12px 0 0; }
+
+/* Dark contexts — footer socials + CTA contact */
+.footer__col--social a { display: inline-flex; align-items: center; }
+.footer__col--social a .ico { width: 17px; height: 17px; margin-inline-end: 9px; color: rgba(255,255,255,.6); transition: color .3s; }
+.footer__col--social a:hover .ico { color: var(--white); }
+.cta__contact a { display: inline-flex; align-items: center; }
+.cta__contact a .ico { width: 17px; height: 17px; margin-inline-end: 8px; color: var(--teal-300); }
+
+/* Arrow icon — replaces the text glyph; the existing .btn hover-slide stays on the span */
+.btn .arrow.ico { width: 1.05em; height: 1.05em; }
+html[dir="rtl"] .arrow.ico svg { transform: scaleX(-1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ico, .ico svg, .ico--badge, .ico--badge svg circle[fill] { transition: none !important; }
+  .svc-card:hover .ico--badge { transform: none; }
+  .svc-card:hover .ico--badge svg circle[fill] { transform: none; }
+  html[dir="rtl"] .arrow.ico svg { transform: scaleX(-1) !important; } /* mirror = direction, keep it */
+}
+
 /* ============ ATMOSPHERE: scroll progress + film grain ============ */
 .scroll-progress {
   position: fixed; inset-block-start: 0; inset-inline: 0; height: 3px;

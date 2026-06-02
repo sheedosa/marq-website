@@ -546,6 +546,7 @@
   /* ---------------- Boot ---------------- */
   function boot() {
     fillPatterns();
+    if (window.MarQIcons) window.MarQIcons.init();
     initNav();
     initHeroVideo();
     initReveals();
