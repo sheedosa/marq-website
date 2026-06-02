@@ -18,7 +18,7 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative min-h-screen flex items-center pt-28 pb-16 px-6 md:px-12 lg:px-24 overflow-hidden">
-      {/* full-bleed video + plum wash */}
+      {/* full-bleed hero video — pure, no overlay (autoplay + loop + muted) */}
       <div className="absolute inset-0 -z-10">
         <video
           ref={videoRef}
@@ -31,8 +31,6 @@ export default function Hero() {
         >
           <source src={`${import.meta.env.BASE_URL}hero.mp4`} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-plum-900/95 via-brand-plum/85 to-brand-plum/55" />
-        <div className="absolute inset-0 bg-brand-plum/30" />
       </div>
 
       {/* vertical rail */}
@@ -46,7 +44,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto w-full">
+      <div className="max-w-7xl mx-auto w-full hero-legible">
         {/* tags */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

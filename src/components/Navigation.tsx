@@ -25,7 +25,10 @@ export default function Navigation() {
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 lg:px-24 py-7 flex justify-between items-center mix-blend-difference"
       >
-        <a href="#top" className="text-2xl font-black tracking-tighter text-brand-teal font-display">MARQ</a>
+        <a href="#top" aria-label="MarQ — Branding Solutions" className="flex flex-col leading-none text-brand-teal font-display">
+          <span className="text-2xl font-black tracking-tighter">MarQ</span>
+          <span className="text-[7px] font-bold uppercase tracking-[0.28em] tracky opacity-80">Branding Solutions</span>
+        </a>
 
         <div className="hidden md:flex items-center gap-10 text-[11px] uppercase tracking-[0.2em] tracky font-bold text-white">
           {links}

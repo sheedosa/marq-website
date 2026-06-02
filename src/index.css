@@ -21,6 +21,9 @@ html[lang="ar"] { font-family: var(--font-ar); line-height: 1.8; }
 html[lang="ar"] .display { font-family: var(--font-ar); font-style: normal !important; text-transform: none !important; letter-spacing: -0.01em; line-height: 1.05; }
 html[lang="ar"] .tracky { letter-spacing: 0 !important; }
 
+/* Keep hero text legible over the pure (un-overlaid) video — shadow on the text, not the video. */
+.hero-legible { text-shadow: 0 1px 2px rgba(33, 16, 35, 0.35), 0 6px 34px rgba(33, 16, 35, 0.4); }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
