@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 import { useLang } from '../i18n';
 import { CONTENT } from '../content';
+import { fadeUpSm, stagger, viewport, EASE } from '../motion';
 
 export default function Hero() {
   const { lang } = useLang();
@@ -46,9 +47,9 @@ export default function Hero() {
 
         {/* centred headline */}
         <motion.div
-          initial={{ y: 40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
+          initial="hidden"
+          animate="show"
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.15, delayChildren: 0.15 } } }}
           className="relative z-10 text-center px-6 max-w-6xl"
         >
           <div className="absolute inset-0 -z-10 pointer-events-none" style={{
@@ -56,16 +57,22 @@ export default function Hero() {
             margin: '-4rem -5rem',
           }} />
 
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] tracky font-bold text-brand-gold mb-6 md:mb-8 drop-shadow-[0_2px_8px_rgba(61,19,64,0.6)]">
+          <motion.p
+            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } } }}
+            className="text-[10px] sm:text-xs uppercase tracking-[0.3em] tracky font-bold text-brand-gold mb-6 md:mb-8 drop-shadow-[0_2px_8px_rgba(61,19,64,0.6)]"
+          >
             {c.tagA} — {c.tagB}
-          </p>
+          </motion.p>
 
-          <h1 className="display font-display font-black italic uppercase tracking-tighter leading-[0.82] text-[clamp(3.25rem,13.5vw,14rem)] text-white drop-shadow-[0_6px_50px_rgba(61,19,64,0.8)]">
+          <motion.h1
+            variants={{ hidden: { opacity: 0, y: 44 }, show: { opacity: 1, y: 0, transition: { duration: 1, ease: EASE } } }}
+            className="display font-display font-black italic uppercase tracking-tighter leading-[0.82] text-[clamp(3.25rem,13.5vw,14rem)] text-white drop-shadow-[0_6px_50px_rgba(61,19,64,0.8)]"
+          >
             {c.head[0]}
             <br />
             <span className="text-brand-teal drop-shadow-[0_4px_30px_rgba(0,171,189,0.35)]">{c.head[1]}</span>
             <span className="text-brand-gold">.</span>
-          </h1>
+          </motion.h1>
         </motion.div>
 
         {/* scroll indicator */}
@@ -85,35 +92,35 @@ export default function Hero() {
       {/* ═══ INFO BAR ═══ */}
       <section id="info" className="relative z-20 bg-brand-plum-900 border-y border-white/8 py-8 md:py-10 px-6 md:px-12 lg:px-24">
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
           className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 items-center"
         >
-          <p className="sm:col-span-2 lg:col-span-5 text-sm leading-relaxed text-white/75 border-s-2 ps-4 border-brand-teal max-w-lg">
+          <motion.p variants={fadeUpSm} className="sm:col-span-2 lg:col-span-5 text-sm leading-relaxed text-white/75 border-s-2 ps-4 border-brand-teal max-w-lg">
             {c.sub}
-          </p>
+          </motion.p>
 
-          <div className="lg:col-span-3 flex flex-col gap-0.5">
+          <motion.div variants={fadeUpSm} className="lg:col-span-3 flex flex-col gap-0.5">
             <span className="text-[9px] uppercase tracking-[0.2em] tracky text-white/35 font-bold">{c.locLabel}</span>
             <span className="text-base font-bold text-white">{c.locValue}</span>
             <span dir="ltr" className="text-[10px] font-mono text-white/40 inline-block">{c.coords}</span>
-          </div>
+          </motion.div>
 
-          <div className="lg:col-span-2 flex flex-col">
+          <motion.div variants={fadeUpSm} className="lg:col-span-2 flex flex-col">
             <span dir="ltr" className="text-3xl sm:text-4xl font-black text-brand-gold font-display leading-none">{c.statNum}</span>
             <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] tracky font-bold text-white/50 mt-1">{c.statLabel}</span>
-          </div>
+          </motion.div>
 
-          <div className="lg:col-span-2 flex justify-start lg:justify-end">
+          <motion.div variants={fadeUpSm} className="lg:col-span-2 flex justify-start lg:justify-end">
             <a
               href="#services"
               className="text-[10px] uppercase tracking-[0.15em] tracky font-bold text-brand-gold border border-brand-gold/40 rounded-full px-7 py-3 hover:bg-brand-gold hover:text-brand-plum transition-colors duration-300"
             >
               {c.explore}
             </a>
-          </div>
+          </motion.div>
         </motion.div>
       </section>
     </>

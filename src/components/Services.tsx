@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import { useLang } from '../i18n';
 import { CONTENT } from '../content';
+import { fadeUp, fadeUpSm, stagger, staggerFast, viewport } from '../motion';
 
 export default function Services() {
   const { lang } = useLang();
@@ -11,29 +12,38 @@ export default function Services() {
     <section id="services" className="bg-brand-teal text-brand-plum py-24 md:py-32 px-6 md:px-12 lg:px-24 relative z-20 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-20 justify-between items-start">
         {/* sticky sidebar */}
-        <div className="lg:w-[38%] lg:sticky lg:top-28 w-full">
-          <div className="flex items-center gap-4 mb-4">
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          className="lg:w-[38%] lg:sticky lg:top-28 w-full"
+        >
+          <motion.div variants={fadeUpSm} className="flex items-center gap-4 mb-4">
             <span className="text-4xl md:text-6xl font-black opacity-70 font-display">{c.index}</span>
             <span className="text-[9px] uppercase tracking-[0.2em] tracky leading-tight font-bold">{c.kicker}</span>
-          </div>
-          <h2 className="display text-[14vw] sm:text-7xl md:text-[5.5rem] font-black uppercase tracking-tighter leading-[0.82] italic font-display">
+          </motion.div>
+          <motion.h2 variants={fadeUp} className="display text-[14vw] sm:text-7xl md:text-[5.5rem] font-black uppercase tracking-tighter leading-[0.82] italic font-display">
             {c.head[0]}<br /><span className="text-white/80">{c.head[1]}</span>
-          </h2>
-          <p className="mt-8 text-sm leading-relaxed opacity-85 border-s-2 ps-4 border-brand-plum max-w-sm font-medium">
+          </motion.h2>
+          <motion.p variants={fadeUpSm} className="mt-8 text-sm leading-relaxed opacity-85 border-s-2 ps-4 border-brand-plum max-w-sm font-medium">
             {c.intro}
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* service list */}
-        <div className="lg:w-[58%] w-full flex flex-col">
-          {c.items.map((s, i) => (
+        <motion.div
+          variants={staggerFast}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          className="lg:w-[58%] w-full flex flex-col"
+        >
+          {c.items.map((s) => (
             <motion.a
               key={s.num}
               href="#work"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
+              variants={fadeUp}
               className="group border-b border-brand-plum/15 last:border-b-0 py-7 md:py-10 flex items-start justify-between gap-4 hover:border-brand-plum/40 transition-colors"
             >
               <div className="flex-1 min-w-0">
@@ -54,7 +64,7 @@ export default function Services() {
               </div>
             </motion.a>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

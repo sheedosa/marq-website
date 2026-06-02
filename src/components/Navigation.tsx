@@ -46,7 +46,7 @@ export default function Navigation() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 inset-x-0 z-50 px-6 md:px-12 lg:px-24 py-5 flex justify-between items-center transition-colors duration-300 ${
           isDark ? 'text-white bg-brand-plum-900/80 backdrop-blur-lg' : 'text-brand-plum bg-brand-gold/85 backdrop-blur-lg'
         }`}

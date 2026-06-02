@@ -14,7 +14,7 @@
 }
 
 /* base */
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 body { background-color: #3D1340; }
 
 /* Arabic overrides */
