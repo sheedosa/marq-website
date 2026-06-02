@@ -181,7 +181,7 @@ html[dir="rtl"] .eyebrow-tri { clip-path: polygon(100% 0, 0 50%, 100% 100%); }
   text-wrap: balance;
 }
 .hero__accent { font-style: normal; color: var(--gold-500); }
-html[lang="ar"] .hero__head { line-height: 1.18; letter-spacing: 0; }
+html[lang="ar"] .hero__head { line-height: 1.24; letter-spacing: 0; }
 
 .hero__sub {
   max-width: 48ch; margin-top: clamp(22px, 2.6vw, 34px);

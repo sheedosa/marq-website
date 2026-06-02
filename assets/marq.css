@@ -94,6 +94,17 @@ html[lang="ar"] {
   --font-fat: "Cairo", sans-serif;
 }
 
+/* Arabic legibility — looser leading than Latin (~1.6) per the brand brief's 1.7–1.9 */
+html[lang="ar"] { line-height: 1.8; }
+html[lang="ar"] .hero__sub,
+html[lang="ar"] .section-head__intro,
+html[lang="ar"] .process__desc,
+html[lang="ar"] .svc-card__list li,
+html[lang="ar"] .footer__line { line-height: 1.85; }
+html[lang="ar"] .why__statement { line-height: 1.5; }
+html[lang="ar"] .quote blockquote { line-height: 1.6; }
+html[lang="ar"] .section-title { line-height: 1.3; }
+
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; padding: 0; }

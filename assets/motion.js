@@ -350,6 +350,11 @@
         tn.textContent = next;
       }
     });
+    // Rich strings (inline <em> accents, e.g. the "Why" statement): swap whole innerHTML.
+    $$("[data-ar-html]").forEach((el) => {
+      if (!el.hasAttribute("data-en-html")) el.setAttribute("data-en-html", el.innerHTML.trim());
+      el.innerHTML = isAr ? el.getAttribute("data-ar-html") : el.getAttribute("data-en-html");
+    });
     html.lang = isAr ? "ar" : "en";
     html.dir = isAr ? "rtl" : "ltr";
     $$(".lang-toggle__opt").forEach((o) => o.classList.toggle("is-on", o.dataset.lang === lang));
@@ -423,17 +428,27 @@
     refill: fillPatterns,
   };
 
-  /* ---------------- Statement ticker ---------------- */
-  function initTicker() {
-    const track = $("#tickerTrack");
-    if (!track || !P) return;
-    const phrases = [
+  /* ---------------- Statement ticker (bilingual) ---------------- */
+  var TICKER = {
+    en: [
       "A mark worth <em>remembering</em>",
       "More than a logo",
       "Built to be <em>recognised</em>",
       "Strategy · Identity · Digital",
       "Leave a <em>mark</em>",
-    ];
+    ],
+    ar: [
+      "أثرٌ يستحقّ أن <em>يُذكر</em>",
+      "أكثر من مجرّد شعار",
+      "علامات تُبنى <em>لتبقى</em>",
+      "استراتيجية · هوية · رقمي",
+      "اترك <em>أثراً</em>",
+    ],
+  };
+  function renderTicker() {
+    const track = $("#tickerTrack");
+    if (!track || !P) return;
+    const phrases = TICKER[document.documentElement.lang === "ar" ? "ar" : "en"];
     const seps = [
       P.tile("circle", { fg: P.COLORS.gold700, size: 20 }),
       P.tile("triangle", { fg: P.COLORS.teal700, size: 20 }),
@@ -444,6 +459,10 @@
       html += '<span class="ticker__item">' + p + '</span><span class="ticker__sep">' + seps[i % seps.length] + "</span>";
     });
     track.innerHTML = html + html; // duplicate for a seamless -50% loop
+  }
+  function initTicker() {
+    renderTicker();
+    onLangChange(renderTicker); // re-render in the active language on toggle
   }
 
   /* ---------------- Scroll progress ---------------- */
