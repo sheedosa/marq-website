@@ -1,64 +1,50 @@
-# MarQ — Branding Solutions
+# MarQ — Branding Solutions, Libya
 
-A single-page marketing site for **MarQ**, a Doha-based branding studio.
-Built in the studio's *Modular Geometric Modernism* visual language — the brand's
-own pattern system (circles, semicircles, triangles, quarter-tiles, M/Q glyphs)
-drives every section, with a full-bleed animated hero, scroll motion, count-up
-stats, and a bilingual **EN / ع** RTL toggle.
+A single-page marketing site for **MarQ**, a Libya-based branding studio — built in a
+bold, brutalist-editorial style (massive italic display type, full-section colour-blocking
+in plum / teal / gold) with a full-bleed animated video hero and a **bilingual EN / ع**
+toggle (RTL-aware).
 
-Plain HTML / CSS / JS — no build step.
+## Stack
+
+- **React 19 + Vite + TypeScript**
+- **Tailwind CSS v4** (`@tailwindcss/vite`, brand tokens in `src/index.css`)
+- **Motion** (Framer Motion) for entrance/scroll animation — respects `prefers-reduced-motion`
+- **lucide-react** icons
+- Fonts: Space Grotesk (display) · Inter (body) · Cairo / Tajawal (Arabic)
 
 ## Structure
 
 ```
-index.html            # the page
-assets/
-  marq.css            # design tokens (color, type, spacing) + buttons
-  sections.css        # nav, hero, and all section styles
-  pattern.js          # the geometric PatternTile system (SVG mosaics/strips)
-  motion.js           # preloader, reveals, counters, nav, language toggle, hero video
-  hero.mp4            # full-bleed hero background animation
-server.js             # tiny static server for local preview
-.nojekyll             # tells GitHub Pages to serve files as-is (no Jekyll build)
+index.html             # Vite entry
+public/hero.mp4         # full-bleed hero background video
+src/
+  main.tsx              # mounts <App/> inside <LanguageProvider/>
+  index.css            # Tailwind + @theme brand tokens + Arabic overrides
+  i18n.tsx             # EN/ع language context (dir + persistence)
+  content.ts           # all bilingual copy (EN + warm-MSA Arabic)
+  App.tsx
+  components/          # Navigation · Hero · Services · Work · Footer
 ```
 
-## Run locally
-
-Any static server works. With Node:
+## Develop
 
 ```bash
-node server.js          # → http://localhost:4317
+npm install
+npm run dev      # http://localhost:4317
+npm run build    # production build → dist/
 ```
 
-Or with Python:
+## Deploy
 
-```bash
-python3 -m http.server 4317
-```
+Pushing to `main` triggers **GitHub Actions** (`.github/workflows/deploy.yml`), which builds
+the site and publishes `dist/` to **GitHub Pages**.
 
-## Deployment (GitHub Pages)
+- Live: https://sheedosa.github.io/marq-website/
+- `vite.config.ts` sets `base` to `/marq-website/` for the build (project Pages path);
+  dev/preview serve from `/`.
 
-This repo is served by **GitHub Pages** from the `main` branch root.
-Pushing to `main` redeploys automatically within a minute or two.
+## Pending real content
 
-Live URL: https://sheedosa.github.io/marq-website/
-
-## Connecting a custom domain
-
-When your domain is ready:
-
-1. **Add a `CNAME` file** to the repo root containing just your domain, e.g.:
-   ```
-   www.yourdomain.com
-   ```
-   (Settings → Pages → "Custom domain" does this for you automatically.)
-2. **Configure DNS** at your domain registrar:
-   - For a subdomain (`www`): add a `CNAME` record →  `sheedosa.github.io`
-   - For the apex/root (`yourdomain.com`): add `A` records to GitHub's IPs:
-     `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-     (and optionally an `AAAA` record set for IPv6).
-3. In **Settings → Pages**, enter the domain and enable **Enforce HTTPS** once the
-   certificate is issued (can take a few minutes to an hour).
-
-All asset paths in the site are relative, so it works at both the
-`/marq-website/` project path and at a root custom domain with no changes.
+Case studies, client logos, and any testimonials are placeholders — swap in the real
+Libyan client names, sectors, and imagery (and project images under `public/`) when ready.

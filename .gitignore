@@ -1,12 +1,15 @@
+# dependencies / build
+node_modules/
+dist/
+
 # OS / editor
 .DS_Store
 Thumbs.db
 *.log
 
-# Local tooling
-.claude/
-node_modules/
+# local env
+.env
+.env.local
 
-# Design handoff bundle (reference only — not part of the deployed site)
+# design handoff bundle (reference only)
 design_extract/
-design_index.html
