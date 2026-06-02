@@ -15,7 +15,7 @@ const THEME: Record<string, 'white' | 'color'> = {
   process: 'white',
   work: 'white',
   start: 'white',
-  studio: 'color',
+  studio: 'white',
 };
 
 export default function Navigation() {

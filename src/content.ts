@@ -3,7 +3,7 @@
 
 export const CONTENT = {
   en: {
-    nav: { services: 'Services', work: 'Work', about: 'About', contact: 'Contact', studio: 'Studio', cta: "Let's Talk" },
+    nav: { home: 'Home', services: 'Services', work: 'Work', about: 'About', contact: 'Contact', studio: 'Studio', cta: "Let's Talk" },
     hero: {
       tagA: 'Branding Studio',
       tagB: 'Tripoli, Libya',
@@ -49,6 +49,10 @@ export const CONTENT = {
       kicker: 'Start a Conversation',
       head: ['Leave a', 'Mark'],
       blurb: 'Ready to build a brand worth remembering? We take on bold projects across Libya and beyond.',
+      tagline: 'A Libyan branding studio building identities that last.',
+      linksLabel: 'Navigate',
+      contactLabel: 'Contact',
+      followLabel: 'Follow',
       email: 'hello@marq.studio',
       phone: '+218 21 000 0000',
       copyright: '© 2025 MarQ — Tripoli, Libya.',
@@ -134,7 +138,7 @@ export const CONTENT = {
   },
 
   ar: {
-    nav: { services: 'خدماتنا', work: 'أعمالنا', about: 'من نحن', contact: 'تواصل', studio: 'الاستوديو', cta: 'لنتحدّث' },
+    nav: { home: 'الرئيسية', services: 'خدماتنا', work: 'أعمالنا', about: 'من نحن', contact: 'تواصل', studio: 'الاستوديو', cta: 'لنتحدّث' },
     hero: {
       tagA: 'استوديو علامات تجارية',
       tagB: 'طرابلس',
@@ -180,6 +184,10 @@ export const CONTENT = {
       kicker: 'ابدأ محادثة',
       head: ['اترك', 'أثراً'],
       blurb: 'مستعدّ لبناء علامة تُذكر؟ نتولّى المشاريع الجريئة في ليبيا وخارجها.',
+      tagline: 'استوديو ليبي للعلامات التجارية يبني هويات تبقى.',
+      linksLabel: 'تصفّح',
+      contactLabel: 'تواصل',
+      followLabel: 'تابعنا',
       email: 'hello@marq.studio',
       phone: '+218 21 000 0000',
       copyright: '© 2025 MarQ — طرابلس، ليبيا.',
