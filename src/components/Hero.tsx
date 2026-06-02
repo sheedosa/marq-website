@@ -55,19 +55,27 @@ export default function Hero() {
           />
         </div>
 
-        {/* headline — centred, massive, cinematic */}
+        {/* headline — centred, massive, cinematic. Soft radial scrim behind the text only. */}
         <motion.div
           initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 0.15, ease: 'easeOut' }}
           className="relative z-10 text-center px-6"
         >
-          <h1 className="display font-display font-black italic uppercase tracking-tighter leading-[0.85] text-[16vw] sm:text-8xl md:text-9xl lg:text-[180px] xl:text-[210px] text-white hero-legible">
+          {/* radial glow behind the text — fades to transparent at the edges so the video stays visible around it */}
+          <div
+            className="absolute inset-0 -z-10 pointer-events-none rounded-3xl"
+            style={{
+              background: 'radial-gradient(ellipse 80% 70% at 50% 50%, rgba(61,19,64,0.85) 0%, rgba(61,19,64,0.55) 50%, transparent 100%)',
+              margin: '-3rem -4rem',
+            }}
+          />
+          <h1 className="display font-display font-black italic uppercase tracking-tighter leading-[0.85] text-[16vw] sm:text-8xl md:text-9xl lg:text-[180px] xl:text-[210px] text-white drop-shadow-[0_4px_40px_rgba(61,19,64,0.7)]">
             {c.head[0]}{' '}
-            <span className="text-brand-teal">{c.head[2]}</span>
+            <span className="text-brand-teal drop-shadow-[0_4px_30px_rgba(0,171,189,0.4)]">{c.head[2]}</span>
             <span className="text-brand-gold">.</span>
           </h1>
-          <p className="mt-4 md:mt-6 text-xs sm:text-sm uppercase tracking-[0.25em] tracky font-bold text-white/60 hero-legible">
+          <p className="mt-4 md:mt-6 text-xs sm:text-sm uppercase tracking-[0.25em] tracky font-bold text-white/70 drop-shadow-[0_2px_12px_rgba(61,19,64,0.6)]">
             {c.tagA} — {c.tagB}
           </p>
         </motion.div>
