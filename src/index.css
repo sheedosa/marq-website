@@ -19,7 +19,10 @@ body { background-color: #3D1340; }
 
 /* Arabic overrides */
 html[lang="ar"] { font-family: var(--font-ar); line-height: 1.8; }
-html[lang="ar"] .display { font-family: var(--font-ar); font-style: normal !important; text-transform: none !important; letter-spacing: -0.01em; line-height: 1.05; }
+/* Arabic display headings: no italic/uppercase, no negative tracking, and enough
+   line-height so stacked lines (e.g. اترك / أثراً) never collide — Cairo's glyphs
+   (ascenders + tashkeel) need more vertical room than the tight Latin leading. */
+html[lang="ar"] .display { font-family: var(--font-ar); font-style: normal !important; text-transform: none !important; letter-spacing: 0 !important; line-height: 1.5 !important; padding-block: 0.08em; }
 html[lang="ar"] .tracky { letter-spacing: 0 !important; }
 
 /* reduced motion */
