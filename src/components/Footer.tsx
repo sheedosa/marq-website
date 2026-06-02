@@ -8,47 +8,55 @@ export default function Footer() {
   const c = CONTENT[lang].footer;
 
   return (
-    <footer id="studio" className="bg-brand-gold text-brand-plum py-24 px-6 md:px-12 lg:px-24 relative z-20 overflow-hidden">
+    <footer id="studio" className="bg-brand-gold text-brand-plum py-24 md:py-32 px-6 md:px-12 lg:px-24 relative z-20 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
-        <div className="flex flex-col items-center gap-3 mb-6">
-          <div className="text-3xl md:text-5xl font-black text-brand-plum opacity-50 font-display">{c.index}</div>
-          <div className="text-[9px] uppercase tracking-widest tracky leading-tight font-bold">{c.kicker[0]} <br /> {c.kicker[1]}</div>
+        {/* section index */}
+        <div className="flex flex-col items-center gap-2 mb-8 md:mb-10">
+          <span className="text-4xl md:text-6xl font-black text-brand-plum/40 font-display">{c.index}</span>
+          <span className="text-[9px] uppercase tracking-[0.2em] tracky font-bold">{c.kicker}</span>
         </div>
 
+        {/* headline */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="display text-[20vw] sm:text-7xl md:text-[140px] font-black uppercase tracking-tighter italic leading-[0.8] mb-10 md:mb-12 font-display"
+          className="display text-[18vw] sm:text-7xl md:text-[10rem] lg:text-[12rem] font-black uppercase tracking-tighter italic leading-[0.8] mb-10 md:mb-14 font-display"
         >
-          {c.head[0]}<br /><span className="text-white ms-12 md:ms-24">{c.head[1]}</span>
+          {c.head[0]}<br />
+          <span className="text-white ms-10 md:ms-20">{c.head[1]}</span>
         </motion.h2>
 
-        <p className="text-sm md:text-base font-medium max-w-md text-brand-plum/90 mb-12 md:mb-16 leading-relaxed border-s-2 border-brand-plum ps-4 text-start">
+        {/* blurb */}
+        <p className="text-sm md:text-base font-medium max-w-md text-brand-plum/80 mb-12 md:mb-16 leading-relaxed border-s-2 border-brand-plum/40 ps-4 text-start mx-auto">
           {c.blurb}
         </p>
 
-        <a
-          href={`mailto:${c.email}`}
-          className="group flex flex-col md:flex-row items-center gap-5 md:gap-8 text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter uppercase italic text-brand-plum hover:text-white transition-colors duration-300 break-all md:break-normal font-display"
-        >
-          {c.email}
-          <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-brand-plum flex items-center justify-center group-hover:border-white transition-colors duration-300 shrink-0">
-            <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 rtl:-scale-x-100 transition-transform duration-300 w-5 h-5 md:w-7 md:h-7" />
-          </div>
-        </a>
+        {/* contact */}
+        <div className="flex flex-col items-center gap-6">
+          <a
+            href={`mailto:${c.email}`}
+            className="group flex items-center gap-4 md:gap-6 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter uppercase italic text-brand-plum hover:text-white transition-colors duration-300 font-display"
+          >
+            <span dir="ltr" className="break-all md:break-normal">{c.email}</span>
+            <span className="w-10 h-10 md:w-14 md:h-14 rounded-full border-2 border-brand-plum/60 flex items-center justify-center group-hover:border-white group-hover:bg-white group-hover:text-brand-plum transition-all duration-300 shrink-0">
+              <ArrowUpRight size={20} className="rtl:-scale-x-100" />
+            </span>
+          </a>
 
-        <a href={`tel:${c.phone.replace(/\s/g, '')}`} dir="ltr" className="mt-6 text-sm font-bold tracking-widest text-brand-plum/70 hover:text-brand-plum transition-colors">
-          {c.phone}
-        </a>
+          <a href={`tel:${c.phone.replace(/\s/g, '')}`} dir="ltr" className="text-sm font-bold tracking-widest text-brand-plum/60 hover:text-brand-plum transition-colors">
+            {c.phone}
+          </a>
+        </div>
 
-        <div className="w-full mt-20 md:mt-28 pt-7 border-t border-brand-plum/20 flex flex-col md:flex-row justify-between items-center gap-5 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] tracky">
+        {/* bottom bar */}
+        <div className="w-full mt-24 md:mt-32 pt-7 border-t border-brand-plum/15 flex flex-col sm:flex-row justify-between items-center gap-5 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] tracky text-brand-plum/70">
           <p>{c.copyright}</p>
-          <div className="flex gap-8" dir="ltr">
-            <a href="#" className="hover:text-white transition-colors">Instagram</a>
-            <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
-            <a href="#" className="hover:text-white transition-colors">Behance</a>
-          </div>
+          <nav className="flex gap-8" dir="ltr" aria-label="Social links">
+            {c.socials.map((s) => (
+              <a key={s} href="#" className="hover:text-brand-plum transition-colors">{s}</a>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>
